@@ -1,7 +1,7 @@
 <template>
-  <b-container>
+  <div class="container">
     <h2>Sorting Visualizer</h2>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -11,4 +11,12 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+  align-content: center;
+  justify-content: center;
+}
+</style>

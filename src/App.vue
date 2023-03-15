@@ -1,8 +1,8 @@
 <script>
 // TODO: Convert to typescript
 // <script setup lang="ts">
-import Slider from "./components/Slider.vue";
-import Dropdown from "./components/Dropdown.vue";
+import BarSlider from "./components/BarSlider.vue";
+import DropdownMenu from "./components/DropdownMenu.vue";
 import Header from "./components/Header.vue";
 import Data from "./components/Data.vue";
 import bubbleSort from "./algorithms/bubbleSort/bubbleSort.js";
@@ -17,8 +17,8 @@ export default {
   components: {
     Header,
     Data,
-    Dropdown,
-    Slider,
+    DropdownMenu,
+    BarSlider,
   },
   data() {
     return {
@@ -140,11 +140,11 @@ export default {
 </script>
 
 <template>
-  <v-app id="app">
+  <div>
     <Header />
     <Data v-bind:numbers="numbers" :quantity="quantity" />
-    <Slider @changeSize="changeSize" />
-    <Dropdown
+    <BarSlider @changeSize="changeSize" />
+    <DropdownMenu
       @new-array="populateArray"
       @bubble="bubble"
       @insertion="insertion"
@@ -153,21 +153,10 @@ export default {
       @heap="heap"
       @merge="merge"
     />
-  </v-app>
+  </div>
 </template>
 
 <style >
-* {
-  background-color: #17252a;
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #feffff;
-  margin-top: 40px;
-}
 .toast {
   justify-content: center;
   align-items: center;

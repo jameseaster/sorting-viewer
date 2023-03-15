@@ -1,13 +1,13 @@
 <template>
-  <b-container>
-    <b-row
-      align-h="center"
-      align-w="center"
-      style="max-width: 300px"
-      align-self="center"
-      class="mx-auto my-2"
-    >
-      <v-slider
+  <div style="max-width: 200px">
+    <Slider
+      :min="min"
+      :max="max"
+      :step="step"
+      class="w-14rem"
+      v-model="quantity"
+    />
+    <!-- <v-slider
         v-model="quantity"
         :min="min"
         :max="max"
@@ -21,14 +21,13 @@
         <template v-slot:append>
           <v-icon @click="increment"> mdi-plus </v-icon>
         </template>
-      </v-slider>
-    </b-row>
-  </b-container>
+      </v-slider> -->
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Slider",
+  name: "BarSlider",
   data() {
     return {
       step: 1,

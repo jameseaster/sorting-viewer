@@ -1,11 +1,5 @@
 <template>
-  <b-row align-h="center" class="container">
-    <b-collapse id="collapse-1" class="mt-2">
-      <b-card class="mt-1 mb-5 mx-3">
-        <p class="card-text">{{ getInformation(algorithm) }}</p>
-      </b-card>
-    </b-collapse>
-  </b-row>
+  <p v-if="showInfo">{{ getInformation(name) }}</p>
 </template>
 
 <script>
@@ -18,7 +12,16 @@ import mergeInfo from "../algorithms/mergeSort/mergeInfo.js";
 
 export default {
   name: "Info",
-  props: { algorithm: String },
+  props: {
+    showInfo: {
+      type: Boolean,
+      default: false,
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+  },
   methods: {
     getInformation(name) {
       if (name === "bubble") {

@@ -29,11 +29,10 @@ npm install
 Start local server
 
 ```bash
-npm run serve
+npm run dev
 ```
 
 ## Resources
 
 - [Vue](https://vuejs.org/)
-- [Vuetify](https://vuetifyjs.com/en/)
-- [BootstrapVue](https://bootstrap-vue.org/)
+- [PrimeVue](https://primevue.org/)

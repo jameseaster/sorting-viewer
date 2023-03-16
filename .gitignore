@@ -26,6 +26,3 @@ coverage
 *.njsproj
 *.sln
 *.sw?
-
-# Deploy notes for gh pages
-DeployNotes.md

@@ -11,7 +11,7 @@ export default async function heapSort(ref, array) {
 
     // change the color of the endIdx, its in its sorted position
     let { value } = array[endIdx];
-    ref.$set(array, endIdx, { value, color: ref.sorted });
+    ref.numbers[endIdx] = { value, color: ref.sorted };
 
     // pauses the event loop to better visualize the algo
     await new Promise((resolve) => setTimeout(resolve, 80));
@@ -19,7 +19,7 @@ export default async function heapSort(ref, array) {
 
   // change the color of the first, its in its sorted position
   let { value } = array[0];
-  ref.$set(array, 0, { value, color: ref.sorted });
+  ref.numbers[0] = { value, color: ref.sorted };
 
   return array;
 }
@@ -78,8 +78,8 @@ async function swap(ref, a, b, array) {
   let { value: aVal, color: aCol } = array[a];
   let { value: bVal, color: bCol } = array[b];
 
-  ref.$set(array, a, { value: bVal, color: aCol });
-  ref.$set(array, b, { value: aVal, color: bCol });
+  ref.numbers[a] = { value: bVal, color: aCol };
+  ref.numbers[b] = { value: aVal, color: bCol };
 }
 
 function colorLevels(ref, array, endIdx) {
@@ -100,11 +100,11 @@ function colorLevels(ref, array, endIdx) {
   array.forEach((num, index) => {
     if (index === 0) {
       let { value } = num;
-      ref.$set(array, index, { value, color: "white" });
+      ref.numbers[index] = { value, color: "white" };
     } else if (index > 0 && index < endIdx) {
       let level = 1 + Math.floor(Math.log(index + 1) / Math.log(2));
       let { value } = num;
-      ref.$set(array, index, { value, color: colors[level - 1] });
+      ref.numbers[index] = { value, color: colors[level - 1] };
     }
   });
 }

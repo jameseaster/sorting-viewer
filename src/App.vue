@@ -81,36 +81,18 @@ export default {
           // changes the color of the two indexes being compared
           let { value: val1, color: col1 } = this.numbers[todo.idx1];
           let { value: val2, color: col2 } = this.numbers[todo.idx2];
-          this.$set(this.numbers, todo.idx1, {
-            value: val1,
-            color: this.compare,
-          });
-          this.$set(this.numbers, todo.idx2, {
-            value: val2,
-            color: this.compare,
-          });
-
+          this.numbers[todo.idx1] = { value: val1, color: this.compare };
+          this.numbers[todo.idx2] = { value: val2, color: this.compare };
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
-
           // changes the colors back to original color
-          this.$set(this.numbers, todo.idx1, {
-            value: val1,
-            color: col1,
-          });
-          this.$set(this.numbers, todo.idx2, {
-            value: val2,
-            color: col2,
-          });
+          this.numbers[todo.idx1] = { value: val1, color: col1 };
+          this.numbers[todo.idx2] = { value: val2, color: col2 };
         } else {
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
-
           // overwrite idx1 with idx2, change color to sorted
-          this.$set(this.numbers, todo.idx1, {
-            value: todo.value,
-            color: this.sorted,
-          });
+          this.numbers[todo.idx1] = { value: todo.value, color: this.sorted };
         }
       }
     },

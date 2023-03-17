@@ -1,12 +1,5 @@
 <template>
-  <div
-    :style="{
-      margin: '5vw',
-      display: 'flex',
-      alignItems: 'baseline',
-      justifyContent: 'center',
-    }"
-  >
+  <div class="data-container">
     <div
       v-bind:key="index"
       :style="{ 'flex-grow': 1 }"
@@ -36,10 +29,11 @@ export default {
 </script>
 
 <style scoped>
-.data {
-  height: 300px;
+.data-container {
+  margin: 16px 5%;
   display: flex;
-  max-width: 95%;
+  height: 350px;
   align-items: flex-end;
+  justify-content: center;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div style="max-width: 200px">
+  <div class="slider">
     <Slider
       :min="min"
       :max="max"
@@ -7,7 +7,7 @@
       class="w-14rem"
       v-model="quantity"
     />
-    <Toast />
+    <!-- <Toast /> -->
     <!-- <v-slider
         v-model="quantity"
         :min="min"
@@ -39,14 +39,14 @@ export default {
   },
   watch: {
     quantity: function (newVal) {
-      this.$emit("changeSize", newVal);
+      this.$parent.$emit("changeSize", newVal);
     },
   },
   methods: {
     decrement: function () {
       if (this.quantity > 2) {
         this.quantity -= 1;
-        this.$emit("changeSize", this.quantity);
+        this.$parent.$emit("changeSize", this.quantity);
       } else {
         this.toast("Minimum");
       }
@@ -54,7 +54,7 @@ export default {
     increment: function () {
       if (this.quantity < 82) {
         this.quantity += 1;
-        this.$emit("changeSize", this.quantity);
+        this.$parent.$emit("changeSize", this.quantity);
       } else {
         this.toast("Maximum");
       }
@@ -71,3 +71,12 @@ export default {
 };
 </script>
 
+
+
+<style scoped>
+.slider {
+  width: 200px;
+  margin: 16px;
+  display: block;
+}
+</style>

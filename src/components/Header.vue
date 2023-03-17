@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <h2>Sorting Visualizer</h2>
+  <div class="header-container">
+    <h1>Sorting Viewer</h1>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.header-container {
   width: 100%;
   display: flex;
   margin-top: 30px;

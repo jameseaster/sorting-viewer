@@ -1,5 +1,5 @@
 <template>
-  <p v-if="showInfo">{{ getInformation(name) }}</p>
+  <p class="info" v-if="showInfo">{{ getInformation(name) }}</p>
 </template>
 
 <script>
@@ -45,12 +45,8 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+.info {
+  margin: 24px;
+  max-width: 500px;
 }
 </style>

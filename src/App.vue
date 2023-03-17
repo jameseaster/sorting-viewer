@@ -3,9 +3,8 @@
 // <script setup lang="ts">
 import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
-import BarSlider from "./components/BarSlider.vue";
+import Controls from "./components/Controls.vue";
 import heapSort from "./algorithms/heapSort/heapSort.js";
-import DropdownMenu from "./components/DropdownMenu.vue";
 import quickSort from "./algorithms/quickSort/quickSort.js";
 import mergeSort from "./algorithms/mergeSort/mergeSort.js";
 import bubbleSort from "./algorithms/bubbleSort/bubbleSort.js";
@@ -17,8 +16,7 @@ export default {
   components: {
     Data,
     Header,
-    BarSlider,
-    DropdownMenu,
+    Controls,
   },
   data() {
     return {
@@ -42,7 +40,7 @@ export default {
       this.lastAlgo = "";
       this.numbers = [];
       for (let i = 0; i < this.quantity; i++) {
-        let value = Math.round(Math.random() * 250) + 10;
+        let value = Math.round(Math.random() * 330) + 20;
         let color = this.primary;
         this.numbers.push({ value, color });
       }
@@ -101,18 +99,16 @@ export default {
 </script>
 
 <template>
-  <div>
-    <Header />
-    <Data v-bind:numbers="numbers" :quantity="quantity" />
-    <BarSlider @changeSize="changeSize" />
-    <DropdownMenu
-      @heap="heap"
-      @quick="quick"
-      @merge="merge"
-      @bubble="bubble"
-      @insertion="insertion"
-      @selection="selection"
-      @new-array="populateArray"
-    />
-  </div>
+  <Header />
+  <Data v-bind:numbers="numbers" :quantity="quantity" />
+  <Controls
+    @heap="heap"
+    @quick="quick"
+    @merge="merge"
+    @bubble="bubble"
+    @insertion="insertion"
+    @selection="selection"
+    @changeSize="changeSize"
+    @new-array="populateArray"
+  />
 </template>

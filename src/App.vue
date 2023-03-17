@@ -1,24 +1,24 @@
 <script>
 // TODO: Convert to typescript
 // <script setup lang="ts">
-import BarSlider from "./components/BarSlider.vue";
-import DropdownMenu from "./components/DropdownMenu.vue";
-import Header from "./components/Header.vue";
 import Data from "./components/Data.vue";
+import Header from "./components/Header.vue";
+import BarSlider from "./components/BarSlider.vue";
+import heapSort from "./algorithms/heapSort/heapSort.js";
+import DropdownMenu from "./components/DropdownMenu.vue";
+import quickSort from "./algorithms/quickSort/quickSort.js";
+import mergeSort from "./algorithms/mergeSort/mergeSort.js";
 import bubbleSort from "./algorithms/bubbleSort/bubbleSort.js";
 import insertionSort from "./algorithms/insertionSort/insertionSort.js";
 import selectionSort from "./algorithms/selectionSort/selectionSort.js";
-import quickSort from "./algorithms/quickSort/quickSort.js";
-import heapSort from "./algorithms/heapSort/heapSort.js";
-import mergeSort from "./algorithms/mergeSort/mergeSort.js";
 
 export default {
   name: "App",
   components: {
-    Header,
     Data,
-    DropdownMenu,
+    Header,
     BarSlider,
+    DropdownMenu,
   },
   data() {
     return {
@@ -96,27 +96,6 @@ export default {
         }
       }
     },
-    test: function () {
-      // REMOVE ANY AWAIT KEYWORDS FOR PROPER TESTING //
-      for (let i = 0; i < 100; i++) {
-        this.populateArray();
-        let testArray = [...this.numbers];
-        testArray.sort((a, b) => a.value - b.value);
-
-        // Choose an algorithm to test:
-        // this.bubbleSort();
-        // this.insertionSort();
-        // this.selectionSort();
-        // this.quickSort();
-        // this.heap();
-        // this.merge();
-
-        let result =
-          this.numbers.length === testArray.length &&
-          this.numbers.every((num, i) => num.value === testArray[i].value);
-        console.log(result);
-      }
-    },
   },
 };
 </script>
@@ -127,25 +106,13 @@ export default {
     <Data v-bind:numbers="numbers" :quantity="quantity" />
     <BarSlider @changeSize="changeSize" />
     <DropdownMenu
-      @new-array="populateArray"
+      @heap="heap"
+      @quick="quick"
+      @merge="merge"
       @bubble="bubble"
       @insertion="insertion"
       @selection="selection"
-      @quick="quick"
-      @heap="heap"
-      @merge="merge"
+      @new-array="populateArray"
     />
   </div>
 </template>
-
-<style >
-.toast {
-  justify-content: center;
-  align-items: center;
-  color: #fff !important;
-  text-align: center;
-  font-size: x-large !important;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-</style>

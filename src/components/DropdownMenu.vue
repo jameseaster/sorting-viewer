@@ -16,6 +16,7 @@
       @click="toggleShowInfo"
     />
     <Info :showInfo="showInfo" :name="selected.value" />
+    <Toast />
   </div>
 </template>
 
@@ -55,12 +56,11 @@ export default {
       }
     },
     toast: function () {
-      this.$bvToast.toast(`Select an algorithm to sort the columns`, {
-        autoHideDelay: 3000,
-        variant: "light",
-        toaster: "b-toaster-top-center",
-        solid: true,
-        className: ["toast"],
+      this.$toast.add({
+        detail: "Select an algorithm to sort the columns",
+        severity: "info",
+        summary: "Info",
+        life: 3000,
       });
     },
   },

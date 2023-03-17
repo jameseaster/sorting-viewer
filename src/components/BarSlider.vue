@@ -7,6 +7,7 @@
       class="w-14rem"
       v-model="quantity"
     />
+    <Toast />
     <!-- <v-slider
         v-model="quantity"
         :min="min"
@@ -59,16 +60,14 @@ export default {
       }
     },
     toast: function (limit) {
-      this.$bvToast.toast(`${limit} number of columns reached`, {
-        autoHideDelay: 3000,
-        variant: "light",
-        toaster: "b-toaster-top-center",
-        solid: true,
-        className: ["toast"],
+      this.$toast.add({
+        detail: `${limit} number of columns reached`,
+        severity: "info",
+        summary: "Info",
+        life: 3000,
       });
     },
   },
 };
 </script>
 
-<style scoped></style>

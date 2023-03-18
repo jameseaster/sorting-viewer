@@ -6,11 +6,7 @@
     @click="toggleTheme"
     style="margin-left: auto"
   />
-  <link
-    :id="link"
-    rel="stylesheet"
-    href="public/bootstrap4-light-blue/theme.css"
-  />
+  <link :id="link" rel="stylesheet" href="/bootstrap4-light-blue/theme.css" />
 </template>
 
 <script>

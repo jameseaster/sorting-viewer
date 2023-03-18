@@ -1,5 +1,5 @@
 <template>
-  <p class="info" v-if="showInfo">{{ getInformation(name) }}</p>
+  <p class="info">{{ getInformation(name) }}</p>
 </template>
 
 <script>
@@ -13,10 +13,6 @@ import mergeInfo from "../algorithms/mergeSort/mergeInfo.js";
 export default {
   name: "Info",
   props: {
-    showInfo: {
-      type: Boolean,
-      default: false,
-    },
     name: {
       type: String,
       default: "",

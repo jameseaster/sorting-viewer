@@ -1,28 +1,16 @@
 <template>
-  <div class="slider">
-    <Slider
-      :min="min"
-      :max="max"
-      :step="step"
-      class="w-14rem"
-      v-model="quantity"
-    />
-    <!-- <Toast /> -->
-    <!-- <v-slider
-        v-model="quantity"
+  <div class="slider-container">
+    <p>Size</p>
+    <div class="slider">
+      <Slider
         :min="min"
-        :max="max"
-        dark
         :step="step"
-        hide-details
-      >
-        <template v-slot:prepend>
-          <v-icon @click="decrement"> mdi-minus </v-icon>
-        </template>
-        <template v-slot:append>
-          <v-icon @click="increment"> mdi-plus </v-icon>
-        </template>
-      </v-slider> -->
+        :max="maxSize"
+        class="w-14rem"
+        v-model="quantity"
+      />
+    </div>
+    <p>{{ quantity }}</p>
   </div>
 </template>
 
@@ -31,10 +19,9 @@ export default {
   name: "BarSlider",
   data() {
     return {
+      min: 5,
       step: 1,
-      min: 2,
-      max: 82,
-      quantity: 42,
+      quantity: 50,
     };
   },
   watch: {
@@ -42,30 +29,10 @@ export default {
       this.$parent.$emit("changeSize", newVal);
     },
   },
-  methods: {
-    decrement: function () {
-      if (this.quantity > 2) {
-        this.quantity -= 1;
-        this.$parent.$emit("changeSize", this.quantity);
-      } else {
-        this.toast("Minimum");
-      }
-    },
-    increment: function () {
-      if (this.quantity < 82) {
-        this.quantity += 1;
-        this.$parent.$emit("changeSize", this.quantity);
-      } else {
-        this.toast("Maximum");
-      }
-    },
-    toast: function (limit) {
-      this.$toast.add({
-        detail: `${limit} number of columns reached`,
-        severity: "info",
-        summary: "Info",
-        life: 3000,
-      });
+  computed: {
+    maxSize() {
+      const screenWidth = window.innerWidth;
+      return Math.floor((screenWidth * 0.25) / 5) * 5;
     },
   },
 };
@@ -74,6 +41,11 @@ export default {
 
 
 <style scoped>
+.slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .slider {
   width: 200px;
   margin: 16px;

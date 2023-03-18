@@ -25,13 +25,26 @@ export default {
       compare: "#66FCF1",
       sorted: "#A768C4",
       lastAlgo: "",
-      quantity: 42,
+      quantity: 50,
     };
   },
   created() {
+    // TODO: STOP SORTING, THEN POPULATE ARRAY
     this.populateArray();
   },
+  mounted() {
+    // this.toast();
+  },
   methods: {
+    toast() {
+      // TODO: Fix width for mobile
+      this.$toast.add({
+        life: 3000,
+        summary: "Info",
+        severity: "info",
+        detail: "Select an algorithm to sort the columns",
+      });
+    },
     changeSize: function (number) {
       this.quantity = number;
       this.populateArray();
@@ -40,7 +53,7 @@ export default {
       this.lastAlgo = "";
       this.numbers = [];
       for (let i = 0; i < this.quantity; i++) {
-        let value = Math.round(Math.random() * 330) + 20;
+        let value = Math.round(Math.random() * 280) + 20;
         let color = this.primary;
         this.numbers.push({ value, color });
       }
@@ -111,4 +124,5 @@ export default {
     @changeSize="changeSize"
     @new-array="populateArray"
   />
+  <Toast />
 </template>

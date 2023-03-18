@@ -16,6 +16,7 @@ import App from "./App.vue";
 import Toast from "primevue/toast";
 import Slider from "primevue/slider";
 import Button from "primevue/button";
+import Dialog from "primevue/dialog";
 import Dropdown from "primevue/dropdown";
 
 // Create App
@@ -26,6 +27,7 @@ app.use(ToastService);
 app.component("Toast", Toast);
 app.component("Button", Button);
 app.component("Slider", Slider);
+app.component("Dialog", Dialog);
 app.component("Dropdown", Dropdown);
 
 app.mount("#app");

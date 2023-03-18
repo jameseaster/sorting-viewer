@@ -8,10 +8,10 @@
       <div
         :style="{
           flexGrow: 1,
+          border: barBorder,
           height: num.value + 'px',
           'background-color': num.color,
           'border-radius': '3px 3px 0px 0px',
-          border: quantity < 60 ? 'solid 2px #17252a' : 'solid 1px #17252a',
         }"
       />
     </div>
@@ -25,14 +25,25 @@ export default {
     numbers: Array,
     quantity: Number,
   },
+  computed: {
+    barBorder() {
+      if (this.quantity < 40) {
+        return "solid 2px #17252a";
+      } else if (this.quantity < 280) {
+        return "solid 1px #17252a";
+      } else {
+        return "";
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
 .data-container {
-  margin: 16px 5%;
+  height: 305px;
   display: flex;
-  height: 350px;
+  margin: 16px 5%;
   align-items: flex-end;
   justify-content: center;
 }

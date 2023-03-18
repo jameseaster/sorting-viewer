@@ -15,7 +15,7 @@ export default {
 .header-container {
   width: 100%;
   display: flex;
-  margin-top: 30px;
+  margin-top: 3%;
   align-content: center;
   justify-content: center;
 }

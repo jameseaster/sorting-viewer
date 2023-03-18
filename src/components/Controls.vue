@@ -1,30 +1,56 @@
 <template>
   <div class="controls-container">
     <!-- Dataset Size -->
-    <div class="mb-16">
-      <BarSlider @changeSize="changeSize" />
+    <div class="mb-8">
+      <BarSlider />
     </div>
 
     <!-- Algorithm Selector -->
-    <div class="mb-16">
+    <div class="dropdown-container">
       <Dropdown
+        class="dropdown"
         v-model="selected"
         :options="options"
         optionLabel="text"
-        class="dropdown"
         placeholder="Select Algorithm"
       />
-      <Button label="Go!" :value="selected" @click="handleClick(selected)" />
     </div>
 
     <!-- Other Controls -->
     <div class="controls">
-      <Button class="btn" @click="$emit('new-array')" label="Reset" />
-      <Button class="btn" :label="infoBtnTitle" @click="toggleShowInfo" />
+      <Button
+        rounded
+        outlined
+        size="large"
+        icon="pi pi-play"
+        @click="handleClick(selected)"
+      />
+      <Button
+        rounded
+        outlined
+        size="large"
+        :value="selected"
+        icon="pi pi-replay"
+        @click="$emit('new-array')"
+      />
+      <Button
+        rounded
+        outlined
+        size="large"
+        icon="pi pi-info"
+        @click="toggleShowInfo"
+      />
     </div>
 
     <!-- Description -->
-    <Info :showInfo="showInfo" :name="selected.value" />
+    <Dialog
+      modal
+      :header="selected.text"
+      v-model:visible="visible"
+      :breakpoints="{ '960px': '75vw', '641px': '100vw' }"
+    >
+      <Info :name="selected.value" />
+    </Dialog>
 
     <!-- Notifications -->
     <Toast />
@@ -40,7 +66,7 @@ export default {
   components: { Info, BarSlider },
   data() {
     return {
-      showInfo: false,
+      visible: false,
       selected: { value: "toast", text: "Select An Algorithm", disabled: true },
       options: [
         { value: "toast", text: "Select An Algorithm", disabled: true },
@@ -53,14 +79,9 @@ export default {
       ],
     };
   },
-  computed: {
-    infoBtnTitle() {
-      return this.showInfo ? "Hide" : "Algo Info";
-    },
-  },
   methods: {
     toggleShowInfo() {
-      this.showInfo = !this.showInfo;
+      this.visible = !this.visible;
     },
     handleClick: function (selected) {
       const { value } = selected;
@@ -85,15 +106,18 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+.dropdown-container {
+  margin-bottom: 8px;
+}
 .dropdown {
-  width: 208px;
+  width: 260px;
   text-align: left;
 }
-.mb-16 {
-  margin-bottom: 16px;
+.mb-8 {
+  margin-bottom: 8px;
 }
 .controls {
-  width: 200px;
+  width: 150px;
   display: flex;
   margin-top: 8px;
   align-items: center;

@@ -7,9 +7,9 @@
     style="margin-left: auto"
   />
   <link
-    id="theme-link"
+    :id="link"
     rel="stylesheet"
-    :href="`public/bootstrap4-${theme}-blue/theme.css`"
+    href="public/bootstrap4-light-blue/theme.css"
   />
 </template>
 
@@ -18,19 +18,38 @@ export default {
   name: "ThemeSelector",
   data() {
     return {
-      theme: "light",
-      icon: "pi pi-moon",
+      icon: "",
+      theme: "",
+      link: "theme-link",
+      light: {
+        name: "light",
+        file: "bootstrap4-light-blue",
+        icon: "pi pi-moon",
+      },
+      dark: {
+        name: "dark",
+        file: "bootstrap4-dark-blue",
+        icon: "pi pi-sun",
+      },
     };
+  },
+  mounted() {
+    this.toLight();
   },
   methods: {
     toggleTheme() {
-      if (this.theme === "light") {
-        this.theme = "dark";
-        this.icon = "pi pi-sun";
-      } else {
-        this.theme = "light";
-        this.icon = "pi pi-moon";
-      }
+      const { light, dark, link, toLight, toDark } = this;
+      this.theme === light.name
+        ? this.$primevue.changeTheme(light.file, dark.file, link, toDark)
+        : this.$primevue.changeTheme(dark.file, light.file, link, toLight);
+    },
+    toDark() {
+      this.theme = this.dark.name;
+      this.icon = this.dark.icon;
+    },
+    toLight() {
+      this.theme = this.light.name;
+      this.icon = this.light.icon;
     },
   },
 };

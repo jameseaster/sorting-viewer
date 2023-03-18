@@ -83,6 +83,7 @@ async function swap(ref, a, b, array) {
 }
 
 function colorLevels(ref, array, endIdx) {
+  // TODO: UPDATE
   const colors = {
     1: "gold",
     2: "#00ff99",
@@ -100,7 +101,7 @@ function colorLevels(ref, array, endIdx) {
   array.forEach((num, index) => {
     if (index === 0) {
       let { value } = num;
-      ref.numbers[index] = { value, color: "white" };
+      ref.numbers[index] = { value, color: "white" }; // TODO: UPDATE
     } else if (index > 0 && index < endIdx) {
       let level = 1 + Math.floor(Math.log(index + 1) / Math.log(2));
       let { value } = num;

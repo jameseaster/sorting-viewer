@@ -28,7 +28,7 @@ export default async function quickSort(ref, array, startIdx, endIdx) {
 
   // set pivot color to be gold
   let { value } = array[pivot];
-  ref.numbers[pivot] = { value, color: "gold" };
+  ref.numbers[pivot] = { value, color: "gold" }; // TODO: UPDATE
 
   // while left pointer is less than or equal to right pivot
   while (left <= right) {

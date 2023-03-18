@@ -21,7 +21,7 @@ export default async function selectionSort(ref, array) {
         smallestIdx = i;
         // Highlight the new smallest with gold
         let { value: iValue } = array[i];
-        ref.numbers[i] = { value: iValue, color: "gold" };
+        ref.numbers[i] = { value: iValue, color: "gold" }; // TODO: UPDATE
       }
 
       if (smallestIdx !== i) {

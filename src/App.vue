@@ -5,6 +5,7 @@ import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import Controls from "./components/Controls.vue";
 import heapSort from "./algorithms/heapSort/heapSort.js";
+import ThemeSelector from "./components/ThemeSelector.vue";
 import quickSort from "./algorithms/quickSort/quickSort.js";
 import mergeSort from "./algorithms/mergeSort/mergeSort.js";
 import bubbleSort from "./algorithms/bubbleSort/bubbleSort.js";
@@ -17,13 +18,14 @@ export default {
     Data,
     Header,
     Controls,
+    ThemeSelector,
   },
   data() {
     return {
       numbers: [],
-      primary: "dodgerblue",
-      compare: "#66FCF1",
-      sorted: "#A768C4",
+      primary: "var(--primary-color)",
+      compare: "var(--teal-500)",
+      sorted: "var(--purple-400)",
       lastAlgo: "",
       quantity: 50,
     };
@@ -32,19 +34,7 @@ export default {
     // TODO: STOP SORTING, THEN POPULATE ARRAY
     this.populateArray();
   },
-  mounted() {
-    // this.toast();
-  },
   methods: {
-    toast() {
-      // TODO: Fix width for mobile
-      this.$toast.add({
-        life: 3000,
-        summary: "Info",
-        severity: "info",
-        detail: "Select an algorithm to sort the columns",
-      });
-    },
     changeSize: function (number) {
       this.quantity = number;
       this.populateArray();
@@ -112,6 +102,7 @@ export default {
 </script>
 
 <template>
+  <ThemeSelector />
   <Header />
   <Data v-bind:numbers="numbers" :quantity="quantity" />
   <Controls
@@ -124,5 +115,4 @@ export default {
     @changeSize="changeSize"
     @new-array="populateArray"
   />
-  <Toast />
 </template>

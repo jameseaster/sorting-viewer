@@ -90,7 +90,7 @@ export default {
     toast: function () {
       this.$toast.add({
         life: 3000,
-        summary: "Info",
+        summary: " ",
         severity: "info",
         detail: "Select an algorithm to sort the columns",
       });

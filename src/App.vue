@@ -10,9 +10,8 @@ import quickSort from "./algorithms/quickSort.ts";
 import bubbleSort from "./algorithms/bubbleSort.ts";
 import { INITIAL_BAR_COUNT } from "@/utils/constants";
 import insertionSort from "./algorithms/insertionSort.ts";
+import selectionSort from "./algorithms/selectionSort.ts";
 import ThemeSelector from "./components/ThemeSelector.vue";
-
-import selectionSort from "./algorithms/selectionSort.js";
 
 export default {
   name: "App",
@@ -60,7 +59,7 @@ export default {
     },
     selection: function () {
       this.lastAlgo = "selection";
-      selectionSort(this, this.bars);
+      selectionSort(this.bars);
     },
     quick: function () {
       this.lastAlgo = "quick";

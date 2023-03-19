@@ -1,24 +1,24 @@
 import type { Bar, Animation } from "@/utils/types";
 
-const mergeSort = (array: Bar[]) => {
-  // an array to hold a list of all of the animations
+const mergeSort = (collection: Bar[]) => {
+  // an collection to hold a list of all of the animations
   const animations: Animation[] = [];
-  array = [...array];
-  // if array is 1 index or fewer, return
-  if (array.length <= 1) return array;
-  // create a copy of array
-  let arrayCopy = [...array];
+  collection = [...collection];
+  // if collection is 1 index or fewer, return
+  if (collection.length <= 1) return collection;
+  // create a copy of collection
+  let collCopy = [...collection];
   // splits and swaps the arrays, also creates midIdx pointer
-  mergeSortHelper(array, 0, array.length - 1, arrayCopy, animations);
-  // returns array of animations
+  mergeSortHelper(collection, 0, collection.length - 1, collCopy, animations);
+  // returns collection of animations
   return animations;
 };
 
 function mergeSortHelper(
-  array: Bar[],
+  collection: Bar[],
   startIdx: number,
   endIdx: number,
-  arrayCopy: Bar[],
+  collCopy: Bar[],
   animations: Animation[]
 ) {
   // if startIdx equals endIdx, return
@@ -26,67 +26,67 @@ function mergeSortHelper(
   // find the middle index
   const midIdx = Math.floor((startIdx + endIdx) / 2);
   // swap the arrays, passing in midIdx to split them
-  mergeSortHelper(arrayCopy, startIdx, midIdx, array, animations);
-  mergeSortHelper(arrayCopy, midIdx + 1, endIdx, array, animations);
+  mergeSortHelper(collCopy, startIdx, midIdx, collection, animations);
+  mergeSortHelper(collCopy, midIdx + 1, endIdx, collection, animations);
   // swap arrays back and merge them passing in all pointers
-  mergeArrays(array, startIdx, midIdx, endIdx, arrayCopy, animations);
+  mergeArrays(collection, startIdx, midIdx, endIdx, collCopy, animations);
 }
 
 function mergeArrays(
-  array: Bar[],
+  collection: Bar[],
   startIdx: number,
   midIdx: number,
   endIdx: number,
-  arrayCopy: Bar[],
+  collCopy: Bar[],
   animations: Animation[]
 ) {
-  // beginning of left portion of array
+  // beginning of left portion of collection
   let i = startIdx;
-  // beginning of right portion of array
+  // beginning of right portion of collection
   let j = midIdx + 1;
-  // index to overwrite in main array
+  // index to overwrite in main collection
   let k = startIdx;
-  // iterate over left and right side of arrayCopy, comparing values
+  // iterate over left and right side of collCopy, comparing values
   while (i <= midIdx && j <= endIdx) {
     // light these up to show that we are comparing these two indexes
     animations.push({ action: "compare", idx1: i, idx2: j });
     // if index in left side < index on right side
-    if (arrayCopy[i].value < arrayCopy[j].value) {
+    if (collCopy[i].value < collCopy[j].value) {
       // light these up to show that it is in its final position
       animations.push({
         action: "overwrite",
         idx1: k,
-        value: arrayCopy[i].value,
+        value: collCopy[i].value,
       });
-      array[k++] = arrayCopy[i++];
+      collection[k++] = collCopy[i++];
     } else {
       // light these up to show that it is in its final position
       animations.push({
         action: "overwrite",
         idx1: k,
-        value: arrayCopy[j].value,
+        value: collCopy[j].value,
       });
-      array[k++] = arrayCopy[j++];
+      collection[k++] = collCopy[j++];
     }
   }
-  // if there are values remaining, overwrite array with them
+  // if there are values remaining, overwrite collection with them
   while (i <= midIdx) {
     // light these up to show that they are in their final position
     animations.push({
       action: "overwrite",
       idx1: k,
-      value: arrayCopy[i].value,
+      value: collCopy[i].value,
     });
-    array[k++] = arrayCopy[i++];
+    collection[k++] = collCopy[i++];
   }
   while (j <= endIdx) {
     // light these up to show that they are in their final position
     animations.push({
       action: "overwrite",
       idx1: k,
-      value: arrayCopy[j].value,
+      value: collCopy[j].value,
     });
-    array[k++] = arrayCopy[j++];
+    collection[k++] = collCopy[j++];
   }
 }
 

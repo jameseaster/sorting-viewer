@@ -57,43 +57,54 @@
   </div>
 </template>
 
+// TODO: UPDATE TO SETUP TAG
 <script>
+import { ref } from "vue";
 import Info from "./Info.vue";
 import BarSlider from "./BarSlider.vue";
+import { useToast } from "primevue/usetoast";
+import { menuOptions, Algorithm } from "../utils/constants";
 
 export default {
   name: "Controls",
   components: { Info, BarSlider },
-  data() {
-    return {
-      visible: false,
-      selected: { value: "toast", text: "Select An Algorithm", disabled: true },
-      options: [
-        { value: "toast", text: "Select An Algorithm", disabled: true },
-        { value: "bubble", text: "Bubble Sort" },
-        { value: "insertion", text: "Insertion Sort" },
-        { value: "selection", text: "Selection Sort" },
-        { value: "quick", text: "Quick Sort" },
-        { value: "heap", text: "Heap Sort" },
-        { value: "merge", text: "Merge Sort" },
-      ],
+  setup() {
+    // Hooks
+    const toast = useToast();
+
+    // Constants
+    const visible = ref(false);
+    const options = ref(menuOptions);
+    const selected = ref(menuOptions[0]);
+
+    // Event handlers
+    const toggleShowInfo = () => {
+      visible.value = !visible.value;
     };
-  },
-  methods: {
-    toggleShowInfo() {
-      this.visible = !this.visible;
-    },
-    handleClick: function (selected) {
-      const { value } = selected;
-      value === "toast" ? this.toast() : this.$emit(value);
-    },
-    toast: function () {
-      this.$toast.add({
-        life: 3000,
+
+    const createToast = () => {
+      toast.add({
+        life: 5000,
         summary: " ",
         severity: "info",
         detail: "Select an algorithm to sort the columns",
       });
+    };
+
+    return {
+      visible,
+      options,
+      selected,
+      createToast,
+      toggleShowInfo,
+    };
+  },
+
+  // TODO: UPDATE TO SETUP TAG
+  methods: {
+    handleClick: function (selected) {
+      const { value } = selected;
+      value === Algorithm.EMPTY ? this.createToast() : this.$emit(value);
     },
   },
 };

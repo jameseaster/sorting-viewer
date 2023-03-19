@@ -3,6 +3,7 @@
     text
     rounded
     :icon="icon"
+    class="theme-icon"
     @click="toggleTheme"
     style="margin-left: auto"
   />
@@ -50,3 +51,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.theme-icon {
+  margin: 8px;
+}
+</style>

@@ -1,15 +1,11 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div class="header-container">
     <h1>Sorting Viewer</h1>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Header",
-  props: {},
-};
-</script>
 
 <style scoped>
 .header-container {

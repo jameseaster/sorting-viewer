@@ -15,25 +15,28 @@
 </template>
 
 <script>
+import { computed, ref, watch } from "vue";
+
 export default {
   name: "BarSlider",
-  data() {
-    return {
-      min: 5,
-      step: 1,
-      quantity: 50,
-    };
-  },
-  watch: {
-    quantity: function (newVal) {
-      this.$parent.$emit("changeSize", newVal);
-    },
-  },
-  computed: {
-    maxSize() {
+  setup() {
+    const min = ref(5);
+    const step = ref(1);
+    const quantity = ref(50);
+
+    const maxSize = computed(() => {
       const screenWidth = window.innerWidth;
       const value = Math.floor((screenWidth * 0.25) / 5) * 5;
       return value < 300 ? value : 300;
+    });
+
+    return { min, step, quantity, maxSize };
+  },
+
+  // TODO: MOVE TO COMPOSABLE
+  watch: {
+    quantity: function (newVal) {
+      this.$parent.$emit("changeSize", newVal);
     },
   },
 };

@@ -18,18 +18,29 @@
   </div>
 </template>
 
+// TODO: UPDATE TO SETUP TAG
 <script>
+import { computed } from "vue";
 export default {
   name: "Data",
   props: {
-    numbers: Array,
-    quantity: Number,
-  },
-  computed: {
-    barBorder() {
-      const under40 = this.quantity < 40;
-      return `solid ${under40 ? "2px" : "1px"} var(--surface-a)`;
+    numbers: {
+      type: Array,
+      default: [],
     },
+    quantity: {
+      type: Number,
+      default: 0,
+    },
+  },
+  setup(props) {
+    // Computed
+    const barBorder = computed(() => {
+      const under40 = props.quantity < 40;
+      return `solid ${under40 ? "2px" : "1px"} var(--surface-a)`;
+    });
+
+    return { barBorder };
   },
 };
 </script>

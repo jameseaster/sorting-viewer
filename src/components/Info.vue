@@ -3,39 +3,21 @@
 </template>
 
 <script>
-import bubbleInfo from "../algorithms/bubbleSort/bubbleInfo.js";
-import insertionInfo from "../algorithms/insertionSort/insertionInfo.js";
-import selectionInfo from "../algorithms/selectionSort/selectionInfo.js";
-import quickInfo from "../algorithms/quickSort/quickInfo.js";
-import heapInfo from "../algorithms/heapSort/heapInfo.js";
-import mergeInfo from "../algorithms/mergeSort/mergeInfo.js";
+import { algoInfo, Algorithm } from "../utils/constants";
 
 export default {
   name: "Info",
   props: {
     name: {
       type: String,
-      default: "",
+      default: Algorithm.EMPTY,
     },
   },
-  methods: {
-    getInformation(name) {
-      if (name === "bubble") {
-        return bubbleInfo();
-      } else if (name === "insertion") {
-        return insertionInfo();
-      } else if (name === "selection") {
-        return selectionInfo();
-      } else if (name === "quick") {
-        return quickInfo();
-      } else if (name === "heap") {
-        return heapInfo();
-      } else if (name === "merge") {
-        return mergeInfo();
-      } else {
-        return `Pick an algorithm from the dropdown menu!`;
-      }
-    },
+  setup() {
+    const getInformation = (name) => {
+      return algoInfo[name];
+    };
+    return { getInformation };
   },
 };
 </script>

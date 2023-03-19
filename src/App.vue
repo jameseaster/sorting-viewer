@@ -7,7 +7,7 @@ import Controls from "./components/Controls.vue";
 import heapSort from "./algorithms/heapSort.js";
 import quickSort from "./algorithms/quickSort.js";
 import mergeSort from "./algorithms/mergeSort.js";
-import bubbleSort from "./algorithms/bubbleSort.js";
+import bubbleSort from "./algorithms/bubbleSort.ts";
 import insertionSort from "./algorithms/insertionSort.js";
 import selectionSort from "./algorithms/selectionSort.js";
 import ThemeSelector from "./components/ThemeSelector.vue";
@@ -50,7 +50,7 @@ export default {
     },
     bubble: function () {
       this.lastAlgo = "bubble";
-      bubbleSort(this, this.bars);
+      bubbleSort(this.bars);
     },
     insertion: function () {
       this.lastAlgo = "insertion";

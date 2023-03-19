@@ -18,3 +18,9 @@ export enum Algorithm {
   HEAP = "heap",
   MERGE = "merge",
 }
+
+export enum Colors {
+  COMPARE = "var(--teal-500)",
+  SORTED = "var(--purple-400)",
+  PRIMARY = "var(--primary-color)",
+}

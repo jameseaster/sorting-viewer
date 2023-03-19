@@ -15,14 +15,15 @@
 </template>
 
 <script>
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
+import { INITIAL_BAR_COUNT } from "@/utils/constants";
 
 export default {
   name: "BarSlider",
   setup() {
     const min = ref(5);
     const step = ref(1);
-    const quantity = ref(50);
+    const quantity = ref(INITIAL_BAR_COUNT);
 
     const maxSize = computed(() => {
       const screenWidth = window.innerWidth;

@@ -1,48 +1,48 @@
 import { Colors, type Bar } from "@/utils/types";
 
-const bubbleSort = async (bars: Bar[]) => {
+const bubbleSort = async (collection: Bar[]) => {
   // change the color to primary to start sorting algorithm
-  bars.forEach((num, i) => {
-    bars[i] = { value: num.value, color: Colors.PRIMARY };
+  collection.forEach((num, i) => {
+    collection[i] = { value: num.value, color: Colors.PRIMARY };
   });
 
   let counter = 0;
   let swap = true;
 
-  while (counter < bars.length && swap) {
+  while (counter < collection.length && swap) {
     swap = false;
-    for (let i = 0; i < bars.length - 1 - counter; i++) {
+    for (let i = 0; i < collection.length - 1 - counter; i++) {
       // change color of two indeces that are being compared
-      let { value: a } = bars[i];
-      let { value: b } = bars[i + 1];
-      bars[i] = { value: a, color: Colors.COMPARE };
-      bars[i + 1] = { value: b, color: Colors.COMPARE };
+      let { value: a } = collection[i];
+      let { value: b } = collection[i + 1];
+      collection[i] = { value: a, color: Colors.COMPARE };
+      collection[i + 1] = { value: b, color: Colors.COMPARE };
 
       // pauses the event loop to better visualize the algo
       await new Promise((resolve) => setTimeout(resolve, 30));
 
       // if the first index is greater than the second
-      if (bars[i].value > bars[i + 1].value) {
+      if (collection[i].value > collection[i + 1].value) {
         swap = true;
         // swap indeces
-        let { value, color } = bars[i];
-        let { value: tempValue } = bars[i + 1];
-        bars[i + 1] = { value, color };
-        bars[i] = { value: tempValue, color };
+        let { value, color } = collection[i];
+        let { value: tempValue } = collection[i + 1];
+        collection[i + 1] = { value, color };
+        collection[i] = { value: tempValue, color };
       }
 
       // change colors back to primary and set the final index color to sorted
-      let { value: newA } = bars[i];
-      let { value: newB } = bars[i + 1];
-      bars[i] = { value: newA, color: Colors.PRIMARY };
-      bars[i + 1] = { value: newB, color: Colors.SORTED };
+      let { value: newA } = collection[i];
+      let { value: newB } = collection[i + 1];
+      collection[i] = { value: newA, color: Colors.PRIMARY };
+      collection[i + 1] = { value: newB, color: Colors.SORTED };
     }
     // increment counter
     counter += 1;
   }
   // change the color to sorted on the final iteration
-  bars.forEach((num, i) => {
-    bars[i] = { value: num.value, color: Colors.SORTED };
+  collection.forEach((num, i) => {
+    collection[i] = { value: num.value, color: Colors.SORTED };
   });
 };
 

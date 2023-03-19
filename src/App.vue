@@ -5,12 +5,14 @@ import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import Controls from "./components/Controls.vue";
 import heapSort from "./algorithms/heapSort.ts";
+import bubbleSort from "./algorithms/bubbleSort.ts";
+import { INITIAL_BAR_COUNT } from "@/utils/constants";
+import insertionSort from "./algorithms/insertionSort.ts";
+import ThemeSelector from "./components/ThemeSelector.vue";
+
 import quickSort from "./algorithms/quickSort.js";
 import mergeSort from "./algorithms/mergeSort.js";
-import bubbleSort from "./algorithms/bubbleSort.ts";
-import insertionSort from "./algorithms/insertionSort.js";
 import selectionSort from "./algorithms/selectionSort.js";
-import ThemeSelector from "./components/ThemeSelector.vue";
 
 export default {
   name: "App",
@@ -24,10 +26,10 @@ export default {
     return {
       bars: [],
       lastAlgo: "",
-      quantity: 50,
-      compare: "var(--teal-500)",
-      sorted: "var(--purple-400)",
-      primary: "var(--primary-color)",
+      quantity: INITIAL_BAR_COUNT,
+      compare: "var(--teal-500)", // TODO: REMOVE
+      sorted: "var(--purple-400)", // TODO: REMOVE
+      primary: "var(--primary-color)", // TODO: REMOVE
     };
   },
   created() {
@@ -54,7 +56,7 @@ export default {
     },
     insertion: function () {
       this.lastAlgo = "insertion";
-      insertionSort(this, this.bars);
+      insertionSort(this.bars);
     },
     selection: function () {
       this.lastAlgo = "selection";

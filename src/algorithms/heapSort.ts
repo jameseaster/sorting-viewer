@@ -1,38 +1,38 @@
 import { Colors, type Bar } from "@/utils/types";
 import { heapSortColorLevels } from "@/utils/constants";
 
-const heapSort = async (array: Bar[]) => {
+const heapSort = async (collection: Bar[]) => {
   // build max heap
-  buildMaxHeap(array);
+  buildMaxHeap(collection);
   // while endpoint is greater than 0
-  for (let endIdx = array.length - 1; endIdx > 0; endIdx--) {
+  for (let endIdx = collection.length - 1; endIdx > 0; endIdx--) {
     // swap first value with the last
-    swap(0, endIdx, array);
+    swap(0, endIdx, collection);
     // siftDown first value, leaving max at the end
-    siftDown(0, endIdx - 1, array);
+    siftDown(0, endIdx - 1, collection);
     // change the color of the endIdx, its in its sorted position
-    let { value } = array[endIdx];
-    array[endIdx] = { value, color: Colors.SORTED };
+    let { value } = collection[endIdx];
+    collection[endIdx] = { value, color: Colors.SORTED };
     // pauses the event loop to better visualize the algo
     await new Promise((resolve) => setTimeout(resolve, 80));
   }
   // change the color of the first, its in its sorted position
-  let { value } = array[0];
-  array[0] = { value, color: Colors.SORTED };
-  return array;
+  let { value } = collection[0];
+  collection[0] = { value, color: Colors.SORTED };
+  return collection;
 };
 
-const buildMaxHeap = (array: Bar[]) => {
+const buildMaxHeap = (collection: Bar[]) => {
   // find last parent index
-  let lastParentIdx = Math.floor((array.length - 2) / 2);
+  let lastParentIdx = Math.floor((collection.length - 2) / 2);
   // sift down each parent
   for (let curParIdx = lastParentIdx; curParIdx >= 0; curParIdx--) {
-    siftDown(curParIdx, array.length - 1, array);
+    siftDown(curParIdx, collection.length - 1, collection);
   }
 };
 
-const siftDown = (currentIdx: number, endIdx: number, array: Bar[]) => {
-  colorLevels(array, endIdx);
+const siftDown = (currentIdx: number, endIdx: number, collection: Bar[]) => {
+  colorLevels(collection, endIdx);
   // find first child
   let childOneIdx = currentIdx * 2 + 1;
   // largest child index
@@ -44,16 +44,16 @@ const siftDown = (currentIdx: number, endIdx: number, array: Bar[]) => {
     // find the child with the greater value
     if (
       childTwoIdx !== -1 &&
-      array[childTwoIdx].value > array[childOneIdx].value
+      collection[childTwoIdx].value > collection[childOneIdx].value
     ) {
       largestChildIdx = childTwoIdx;
     } else {
       largestChildIdx = childOneIdx;
     }
     // if largest child is greater than parent
-    if (array[largestChildIdx].value > array[currentIdx].value) {
+    if (collection[largestChildIdx].value > collection[currentIdx].value) {
       // swap them
-      swap(largestChildIdx, currentIdx, array);
+      swap(largestChildIdx, currentIdx, collection);
       // update currentIdx
       currentIdx = largestChildIdx;
       // update childOneIdx
@@ -66,23 +66,23 @@ const siftDown = (currentIdx: number, endIdx: number, array: Bar[]) => {
 };
 
 // swap the values
-const swap = async (a: number, b: number, array: Bar[]) => {
-  let { value: aVal, color: aCol } = array[a];
-  let { value: bVal, color: bCol } = array[b];
-  array[a] = { value: bVal, color: aCol };
-  array[b] = { value: aVal, color: bCol };
+const swap = async (a: number, b: number, collection: Bar[]) => {
+  let { value: aVal, color: aCol } = collection[a];
+  let { value: bVal, color: bCol } = collection[b];
+  collection[a] = { value: bVal, color: aCol };
+  collection[b] = { value: aVal, color: bCol };
 };
 
 // set the color based on the level in the heap
-const colorLevels = (array: Bar[], endIdx: number) => {
-  array.forEach((num, index) => {
+const colorLevels = (collection: Bar[], endIdx: number) => {
+  collection.forEach((num, index) => {
     if (index === 0) {
       let { value } = num;
-      array[index] = { value, color: Colors.PRIMARY_LIGHT };
+      collection[index] = { value, color: Colors.PRIMARY_LIGHT };
     } else if (index > 0 && index < endIdx) {
       let level = 1 + Math.floor(Math.log(index + 1) / Math.log(2));
       let { value } = num;
-      array[index] = { value, color: heapSortColorLevels[level - 1] };
+      collection[index] = { value, color: heapSortColorLevels[level - 1] };
     }
   });
 };

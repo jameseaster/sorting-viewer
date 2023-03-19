@@ -1,6 +1,8 @@
 import { Algorithm, Colors } from "./types";
 import type { MenuOption } from "./types";
 
+export const INITIAL_BAR_COUNT = 25;
+
 export const heapSortColorLevels: { [key: number]: string } = {
   1: Colors.PINK,
   2: Colors.RED,

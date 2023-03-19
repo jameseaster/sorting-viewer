@@ -6,12 +6,12 @@ import Header from "./components/Header.vue";
 import Controls from "./components/Controls.vue";
 import heapSort from "./algorithms/heapSort.ts";
 import mergeSort from "./algorithms/mergeSort.ts";
+import quickSort from "./algorithms/quickSort.ts";
 import bubbleSort from "./algorithms/bubbleSort.ts";
 import { INITIAL_BAR_COUNT } from "@/utils/constants";
 import insertionSort from "./algorithms/insertionSort.ts";
 import ThemeSelector from "./components/ThemeSelector.vue";
 
-import quickSort from "./algorithms/quickSort.js";
 import selectionSort from "./algorithms/selectionSort.js";
 
 export default {
@@ -64,7 +64,7 @@ export default {
     },
     quick: function () {
       this.lastAlgo = "quick";
-      quickSort(this, this.bars, 0, this.bars.length - 1);
+      quickSort(this.bars, 0, this.bars.length - 1);
     },
     heap: function () {
       this.lastAlgo = "heap";

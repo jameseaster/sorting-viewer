@@ -1,14 +1,20 @@
-export default async function quickSort(ref, array, startIdx, endIdx) {
+import { Colors, type Bar } from "@/utils/types";
+
+export default async function quickSort(
+  array: Bar[],
+  startIdx: number,
+  endIdx: number
+) {
   // if the array is less than length 2, return
   if (startIdx >= endIdx) {
     // change the colors of this array to sorted
     if (array[startIdx]) {
       let { value } = array[startIdx];
-      ref.bars[startIdx] = { value, color: ref.sorted };
+      array[startIdx] = { value, color: Colors.SORTED };
     }
     if (array[endIdx]) {
       let { value } = array[endIdx];
-      ref.bars[endIdx] = { value, color: ref.sorted };
+      array[endIdx] = { value, color: Colors.SORTED };
     }
     return array;
   }
@@ -22,21 +28,21 @@ export default async function quickSort(ref, array, startIdx, endIdx) {
   // // start each array with primary colors
   array.forEach((num, index) => {
     if (index >= startIdx && index <= endIdx) {
-      num.color = ref.primary;
+      num.color = Colors.PRIMARY;
     }
   });
 
   // set pivot color to be gold
   let { value } = array[pivot];
-  ref.bars[pivot] = { value, color: "var(--yellow-300" };
+  array[pivot] = { value, color: Colors.YELLOW };
 
   // while left pointer is less than or equal to right pivot
   while (left <= right) {
     // right and left pointers can be compare color
     let { value: l } = array[left];
     let { value: r } = array[right];
-    ref.bars[left] = { value: l, color: ref.compare };
-    ref.bars[right] = { value: r, color: ref.compare };
+    array[left] = { value: l, color: Colors.COMPARE };
+    array[right] = { value: r, color: Colors.COMPARE };
 
     // pauses the event loop to better visualize the algo
     await new Promise((resolve) => setTimeout(resolve, 20));
@@ -49,21 +55,21 @@ export default async function quickSort(ref, array, startIdx, endIdx) {
       // swap left and right values
       let { value: l } = array[left];
       let { value: r } = array[right];
-      ref.bars[left] = { value: r, color: array[left].color };
-      ref.bars[right] = { value: l, color: array[right].color };
+      array[left] = { value: r, color: array[left].color };
+      array[right] = { value: l, color: array[right].color };
     }
 
     // pivot value is >= left pointer, increase left pointer
     if (array[pivot].value >= array[left].value) {
       let { value: newVal } = array[left];
-      ref.bars[left] = { value: newVal, color: ref.primary };
+      array[left] = { value: newVal, color: Colors.PRIMARY };
       left += 1;
     }
 
     // pivot value is <= right pointer, decrease right pointer
     if (array[pivot].value <= array[right].value) {
       let { value: newVal } = array[right];
-      ref.bars[right] = { value: newVal, color: ref.primary };
+      array[right] = { value: newVal, color: Colors.PRIMARY };
       right -= 1;
     }
   }
@@ -74,19 +80,19 @@ export default async function quickSort(ref, array, startIdx, endIdx) {
   // Swap the values of pivot and right pointer
   let { value: p } = array[pivot];
   let { value: rValue } = array[right];
-  ref.bars[pivot] = { value: rValue, color: ref.compare };
-  ref.bars[right] = { value: p, color: ref.sorted };
+  array[pivot] = { value: rValue, color: Colors.COMPARE };
+  array[right] = { value: p, color: Colors.SORTED };
 
   // find the smaller of the two remaining arrays
   let leftArrayIsSmaller = right - 1 - startIdx < endIdx - right + 1;
 
   // call quickSort on smallest remaining array first
   if (leftArrayIsSmaller) {
-    quickSort(ref, array, startIdx, right - 1);
-    quickSort(ref, array, right + 1, endIdx);
+    quickSort(array, startIdx, right - 1);
+    quickSort(array, right + 1, endIdx);
   } else {
-    quickSort(ref, array, right + 1, endIdx);
-    quickSort(ref, array, startIdx, right - 1);
+    quickSort(array, right + 1, endIdx);
+    quickSort(array, startIdx, right - 1);
   }
 
   return array;

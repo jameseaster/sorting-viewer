@@ -32,7 +32,8 @@ export default {
   computed: {
     maxSize() {
       const screenWidth = window.innerWidth;
-      return Math.floor((screenWidth * 0.25) / 5) * 5;
+      const value = Math.floor((screenWidth * 0.25) / 5) * 5;
+      return value < 300 ? value : 300;
     },
   },
 };

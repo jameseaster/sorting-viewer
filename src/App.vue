@@ -23,11 +23,11 @@ export default {
   data() {
     return {
       numbers: [],
-      primary: "var(--primary-color)",
-      compare: "var(--teal-500)",
-      sorted: "var(--purple-400)",
       lastAlgo: "",
       quantity: 50,
+      compare: "var(--teal-500)",
+      sorted: "var(--purple-400)",
+      primary: "var(--primary-color)",
     };
   },
   created() {

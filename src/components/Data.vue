@@ -27,13 +27,8 @@ export default {
   },
   computed: {
     barBorder() {
-      if (this.quantity < 40) {
-        return "solid 2px #17252a";
-      } else if (this.quantity < 280) {
-        return "solid 1px #17252a";
-      } else {
-        return "";
-      }
+      const under40 = this.quantity < 40;
+      return `solid ${under40 ? "2px" : "1px"} var(--surface-a)`;
     },
   },
 };

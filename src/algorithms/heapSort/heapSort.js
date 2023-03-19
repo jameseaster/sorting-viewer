@@ -83,25 +83,24 @@ async function swap(ref, a, b, array) {
 }
 
 function colorLevels(ref, array, endIdx) {
-  // TODO: UPDATE
   const colors = {
-    1: "gold",
-    2: "#00ff99",
-    3: "#00ccff",
-    4: "pink",
-    5: "#0066cc",
-    6: "purple",
-    7: "silver",
-    8: "brown",
-    9: "orange",
-    10: "white",
+    1: "var(--pink-300)",
+    2: "var(--red-300)",
+    3: "var(--orange-300)",
+    4: "var(--yellow-300)",
+    5: "var(--green-200)",
+    6: "var(--blue-300)",
+    7: "var(--cyan-400)",
+    8: "var(--indigo-200)",
+    9: "var(--bluegray-600)",
+    10: "var(--teal-200)",
   };
 
   // set the color based on the level in the heap
   array.forEach((num, index) => {
     if (index === 0) {
       let { value } = num;
-      ref.numbers[index] = { value, color: "white" }; // TODO: UPDATE
+      ref.numbers[index] = { value, color: "var(--primary-200)" };
     } else if (index > 0 && index < endIdx) {
       let level = 1 + Math.floor(Math.log(index + 1) / Math.log(2));
       let { value } = num;

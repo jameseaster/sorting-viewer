@@ -1,18 +1,5 @@
-interface MenuOption {
-  text: string;
-  value: Algorithm;
-  disabled?: boolean;
-}
-
-export enum Algorithm {
-  EMPTY = "empty",
-  BUBBLE = "bubble",
-  INSERTION = "insertion",
-  SELECTION = "selection",
-  QUICK = "quick",
-  HEAP = "heap",
-  MERGE = "merge",
-}
+import { Algorithm } from "./types";
+import type { MenuOption } from "./types";
 
 export const menuOptions: MenuOption[] = [
   { value: Algorithm.EMPTY, text: "Select An Algorithm", disabled: true },

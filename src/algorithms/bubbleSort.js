@@ -1,7 +1,7 @@
 export default async function bubbleSort(ref, array) {
   // change the color to primary to start sorting algorithm
   array.forEach((num, i) => {
-    ref.numbers[i] = { value: num.value, color: ref.primary };
+    ref.bars[i] = { value: num.value, color: ref.primary };
   });
   let counter = 0;
   let swap = true;
@@ -12,8 +12,8 @@ export default async function bubbleSort(ref, array) {
       // change color of two indeces that are being compared
       let { value: a } = array[i];
       let { value: b } = array[i + 1];
-      ref.numbers[i] = { value: a, color: ref.compare };
-      ref.numbers[i + 1] = { value: b, color: ref.compare };
+      ref.bars[i] = { value: a, color: ref.compare };
+      ref.bars[i + 1] = { value: b, color: ref.compare };
 
       // pauses the event loop to better visualize the algo
       await new Promise((resolve) => setTimeout(resolve, 30));
@@ -24,21 +24,21 @@ export default async function bubbleSort(ref, array) {
         // swap indeces
         let { value, color } = array[i];
         let { value: tempValue } = array[i + 1];
-        ref.numbers[i + 1] = { value, color };
-        ref.numbers[i] = { value: tempValue, color };
+        ref.bars[i + 1] = { value, color };
+        ref.bars[i] = { value: tempValue, color };
       }
 
       // change colors back to primary and set the final index color to sorted
       let { value: newA } = array[i];
       let { value: newB } = array[i + 1];
-      ref.numbers[i] = { value: newA, color: ref.primary };
-      ref.numbers[i + 1] = { value: newB, color: ref.sorted };
+      ref.bars[i] = { value: newA, color: ref.primary };
+      ref.bars[i + 1] = { value: newB, color: ref.sorted };
     }
     // increment counter
     counter += 1;
   }
   // change the color to sorted on the final iteration
   array.forEach((num, i) => {
-    ref.numbers[i] = { value: num.value, color: ref.sorted };
+    ref.bars[i] = { value: num.value, color: ref.sorted };
   });
 }

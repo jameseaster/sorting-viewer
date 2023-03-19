@@ -62,8 +62,9 @@
 import { ref } from "vue";
 import Info from "./Info.vue";
 import BarSlider from "./BarSlider.vue";
+import { Algorithm } from "../utils/types";
 import { useToast } from "primevue/usetoast";
-import { menuOptions, Algorithm } from "../utils/constants";
+import { menuOptions } from "../utils/constants";
 
 export default {
   name: "Controls",

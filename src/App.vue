@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      numbers: [],
+      bars: [],
       lastAlgo: "",
       quantity: 50,
       compare: "var(--teal-500)",
@@ -41,36 +41,36 @@ export default {
     },
     populateArray: function () {
       this.lastAlgo = "";
-      this.numbers = [];
+      this.bars = [];
       for (let i = 0; i < this.quantity; i++) {
         let value = Math.round(Math.random() * 280) + 20;
         let color = this.primary;
-        this.numbers.push({ value, color });
+        this.bars.push({ value, color });
       }
     },
     bubble: function () {
       this.lastAlgo = "bubble";
-      bubbleSort(this, this.numbers);
+      bubbleSort(this, this.bars);
     },
     insertion: function () {
       this.lastAlgo = "insertion";
-      insertionSort(this, this.numbers);
+      insertionSort(this, this.bars);
     },
     selection: function () {
       this.lastAlgo = "selection";
-      selectionSort(this, this.numbers);
+      selectionSort(this, this.bars);
     },
     quick: function () {
       this.lastAlgo = "quick";
-      quickSort(this, this.numbers, 0, this.numbers.length - 1);
+      quickSort(this, this.bars, 0, this.bars.length - 1);
     },
     heap: function () {
       this.lastAlgo = "heap";
-      heapSort(this, this.numbers);
+      heapSort(this, this.bars);
     },
     merge: function () {
       this.lastAlgo = "merge";
-      this.animate(mergeSort(this, this.numbers));
+      this.animate(mergeSort(this, this.bars));
     },
     animate: async function (animations) {
       for (let todo of animations) {
@@ -80,20 +80,20 @@ export default {
 
         if (todo.action === "compare") {
           // changes the color of the two indexes being compared
-          let { value: val1, color: col1 } = this.numbers[todo.idx1];
-          let { value: val2, color: col2 } = this.numbers[todo.idx2];
-          this.numbers[todo.idx1] = { value: val1, color: this.compare };
-          this.numbers[todo.idx2] = { value: val2, color: this.compare };
+          let { value: val1, color: col1 } = this.bars[todo.idx1];
+          let { value: val2, color: col2 } = this.bars[todo.idx2];
+          this.bars[todo.idx1] = { value: val1, color: this.compare };
+          this.bars[todo.idx2] = { value: val2, color: this.compare };
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // changes the colors back to original color
-          this.numbers[todo.idx1] = { value: val1, color: col1 };
-          this.numbers[todo.idx2] = { value: val2, color: col2 };
+          this.bars[todo.idx1] = { value: val1, color: col1 };
+          this.bars[todo.idx2] = { value: val2, color: col2 };
         } else {
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // overwrite idx1 with idx2, change color to sorted
-          this.numbers[todo.idx1] = { value: todo.value, color: this.sorted };
+          this.bars[todo.idx1] = { value: todo.value, color: this.sorted };
         }
       }
     },
@@ -104,7 +104,7 @@ export default {
 <template>
   <ThemeSelector />
   <Header />
-  <Data v-bind:numbers="numbers" :quantity="quantity" />
+  <Data v-bind:bars="bars" :quantity="quantity" />
   <Controls
     @heap="heap"
     @quick="quick"

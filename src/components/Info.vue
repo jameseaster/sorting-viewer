@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import { algoInfo, Algorithm } from "../utils/constants";
+import { Algorithm } from "../utils/types";
+import { algoInfo } from "../utils/constants";
 
 export default {
   name: "Info",

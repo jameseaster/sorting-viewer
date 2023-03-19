@@ -1,16 +1,16 @@
 <template>
   <div class="data-container">
     <div
-      v-bind:key="index"
+      v-for="(bar, idx) in bars"
+      v-bind:key="idx"
       :style="{ 'flex-grow': 1 }"
-      v-for="(num, index) in numbers"
     >
       <div
         :style="{
           flexGrow: 1,
           border: barBorder,
-          height: num.value + 'px',
-          'background-color': num.color,
+          height: bar.value + 'px',
+          'background-color': bar.color,
           'border-radius': '3px 3px 0px 0px',
         }"
       />
@@ -24,7 +24,7 @@ import { computed } from "vue";
 export default {
   name: "Data",
   props: {
-    numbers: {
+    bars: {
       type: Array,
       default: [],
     },

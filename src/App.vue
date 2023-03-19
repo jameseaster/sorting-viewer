@@ -4,13 +4,13 @@
 import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import Controls from "./components/Controls.vue";
-import heapSort from "./algorithms/heapSort/heapSort.js";
+import heapSort from "./algorithms/heapSort.js";
+import quickSort from "./algorithms/quickSort.js";
+import mergeSort from "./algorithms/mergeSort.js";
+import bubbleSort from "./algorithms/bubbleSort.js";
+import insertionSort from "./algorithms/insertionSort.js";
+import selectionSort from "./algorithms/selectionSort.js";
 import ThemeSelector from "./components/ThemeSelector.vue";
-import quickSort from "./algorithms/quickSort/quickSort.js";
-import mergeSort from "./algorithms/mergeSort/mergeSort.js";
-import bubbleSort from "./algorithms/bubbleSort/bubbleSort.js";
-import insertionSort from "./algorithms/insertionSort/insertionSort.js";
-import selectionSort from "./algorithms/selectionSort/selectionSort.js";
 
 export default {
   name: "App",

@@ -24,17 +24,10 @@ import { computed } from "vue";
 export default {
   name: "Data",
   props: {
-    bars: {
-      type: Array,
-      default: [],
-    },
-    quantity: {
-      type: Number,
-      default: 0,
-    },
+    bars: { type: Array, default: [] },
+    quantity: { type: Number, default: 0 },
   },
   setup(props) {
-    // Computed
     const barBorder = computed(() => {
       const under40 = props.quantity < 40;
       return `solid ${under40 ? "2px" : "1px"} var(--surface-a)`;

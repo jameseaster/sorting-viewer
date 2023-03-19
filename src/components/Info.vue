@@ -9,10 +9,7 @@ import { algoInfo } from "../utils/constants";
 export default {
   name: "Info",
   props: {
-    name: {
-      type: String,
-      default: Algorithm.EMPTY,
-    },
+    name: { type: String, default: Algorithm.EMPTY },
   },
   setup() {
     const getInformation = (name) => {

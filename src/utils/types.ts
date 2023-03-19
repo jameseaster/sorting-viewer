@@ -9,6 +9,13 @@ export interface MenuOption {
   disabled?: boolean;
 }
 
+export interface Animation {
+  idx1: number;
+  idx2?: number;
+  value?: number;
+  action: string;
+}
+
 export enum Algorithm {
   EMPTY = "empty",
   BUBBLE = "bubble",

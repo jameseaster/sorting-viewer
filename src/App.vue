@@ -5,13 +5,13 @@ import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import Controls from "./components/Controls.vue";
 import heapSort from "./algorithms/heapSort.ts";
+import mergeSort from "./algorithms/mergeSort.ts";
 import bubbleSort from "./algorithms/bubbleSort.ts";
 import { INITIAL_BAR_COUNT } from "@/utils/constants";
 import insertionSort from "./algorithms/insertionSort.ts";
 import ThemeSelector from "./components/ThemeSelector.vue";
 
 import quickSort from "./algorithms/quickSort.js";
-import mergeSort from "./algorithms/mergeSort.js";
 import selectionSort from "./algorithms/selectionSort.js";
 
 export default {
@@ -72,7 +72,7 @@ export default {
     },
     merge: function () {
       this.lastAlgo = "merge";
-      this.animate(mergeSort(this, this.bars));
+      this.animate(mergeSort(this.bars));
     },
     animate: async function (animations) {
       for (let todo of animations) {

@@ -4,7 +4,7 @@
 import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import Controls from "./components/Controls.vue";
-import heapSort from "./algorithms/heapSort.js";
+import heapSort from "./algorithms/heapSort.ts";
 import quickSort from "./algorithms/quickSort.js";
 import mergeSort from "./algorithms/mergeSort.js";
 import bubbleSort from "./algorithms/bubbleSort.ts";
@@ -66,7 +66,7 @@ export default {
     },
     heap: function () {
       this.lastAlgo = "heap";
-      heapSort(this, this.bars);
+      heapSort(this.bars);
     },
     merge: function () {
       this.lastAlgo = "merge";

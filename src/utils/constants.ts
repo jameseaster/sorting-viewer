@@ -1,5 +1,18 @@
-import { Algorithm } from "./types";
+import { Algorithm, Colors } from "./types";
 import type { MenuOption } from "./types";
+
+export const heapSortColorLevels: { [key: number]: string } = {
+  1: Colors.PINK,
+  2: Colors.RED,
+  3: Colors.ORANGE,
+  4: Colors.YELLOW,
+  5: Colors.GREEN,
+  6: Colors.BLUE,
+  7: Colors.CYAN,
+  8: Colors.INDIGO,
+  9: Colors.GRAY,
+  10: Colors.TEAL,
+};
 
 export const menuOptions: MenuOption[] = [
   { value: Algorithm.EMPTY, text: "Select An Algorithm", disabled: true },

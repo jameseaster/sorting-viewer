@@ -1,52 +1,46 @@
-export default async function heapSort(ref, array) {
+import { Colors, type Bar } from "@/utils/types";
+import { heapSortColorLevels } from "@/utils/constants";
+
+const heapSort = async (array: Bar[]) => {
   // build max heap
-  buildMaxHeap(ref, array);
+  buildMaxHeap(array);
   // while endpoint is greater than 0
   for (let endIdx = array.length - 1; endIdx > 0; endIdx--) {
     // swap first value with the last
-    swap(ref, 0, endIdx, array);
-
+    swap(0, endIdx, array);
     // siftDown first value, leaving max at the end
-    siftDown(ref, 0, endIdx - 1, array);
-
+    siftDown(0, endIdx - 1, array);
     // change the color of the endIdx, its in its sorted position
     let { value } = array[endIdx];
-    ref.bars[endIdx] = { value, color: ref.sorted };
-
+    array[endIdx] = { value, color: Colors.SORTED };
     // pauses the event loop to better visualize the algo
     await new Promise((resolve) => setTimeout(resolve, 80));
   }
-
   // change the color of the first, its in its sorted position
   let { value } = array[0];
-  ref.bars[0] = { value, color: ref.sorted };
-
+  array[0] = { value, color: Colors.SORTED };
   return array;
-}
+};
 
-function buildMaxHeap(ref, array) {
+const buildMaxHeap = (array: Bar[]) => {
   // find last parent index
   let lastParentIdx = Math.floor((array.length - 2) / 2);
-
   // sift down each parent
   for (let curParIdx = lastParentIdx; curParIdx >= 0; curParIdx--) {
-    siftDown(ref, curParIdx, array.length - 1, array);
+    siftDown(curParIdx, array.length - 1, array);
   }
-}
+};
 
-function siftDown(ref, currentIdx, endIdx, array) {
-  colorLevels(ref, array, endIdx);
-
+const siftDown = (currentIdx: number, endIdx: number, array: Bar[]) => {
+  colorLevels(array, endIdx);
   // find first child
   let childOneIdx = currentIdx * 2 + 1;
   // largest child index
   let largestChildIdx;
-
   // only continue if childOneIdx is less <= endIdx
   while (childOneIdx <= endIdx) {
     // find childTwoIdx, must be >= endIdx
     let childTwoIdx = endIdx >= currentIdx * 2 + 2 ? currentIdx * 2 + 2 : -1;
-
     // find the child with the greater value
     if (
       childTwoIdx !== -1 &&
@@ -56,55 +50,41 @@ function siftDown(ref, currentIdx, endIdx, array) {
     } else {
       largestChildIdx = childOneIdx;
     }
-
     // if largest child is greater than parent
     if (array[largestChildIdx].value > array[currentIdx].value) {
       // swap them
-      swap(ref, largestChildIdx, currentIdx, array);
+      swap(largestChildIdx, currentIdx, array);
       // update currentIdx
       currentIdx = largestChildIdx;
       // update childOneIdx
       childOneIdx = currentIdx * 2 + 1;
-
       // if parent is larger than largest child, return
     } else {
       return;
     }
   }
-}
+};
 
-async function swap(ref, a, b, array) {
-  // swap the values
+// swap the values
+const swap = async (a: number, b: number, array: Bar[]) => {
   let { value: aVal, color: aCol } = array[a];
   let { value: bVal, color: bCol } = array[b];
+  array[a] = { value: bVal, color: aCol };
+  array[b] = { value: aVal, color: bCol };
+};
 
-  ref.bars[a] = { value: bVal, color: aCol };
-  ref.bars[b] = { value: aVal, color: bCol };
-}
-
-function colorLevels(ref, array, endIdx) {
-  const colors = {
-    1: "var(--pink-300)",
-    2: "var(--red-300)",
-    3: "var(--orange-300)",
-    4: "var(--yellow-300)",
-    5: "var(--green-200)",
-    6: "var(--blue-300)",
-    7: "var(--cyan-400)",
-    8: "var(--indigo-200)",
-    9: "var(--bluegray-600)",
-    10: "var(--teal-200)",
-  };
-
-  // set the color based on the level in the heap
+// set the color based on the level in the heap
+const colorLevels = (array: Bar[], endIdx: number) => {
   array.forEach((num, index) => {
     if (index === 0) {
       let { value } = num;
-      ref.bars[index] = { value, color: "var(--primary-200)" };
+      array[index] = { value, color: Colors.PRIMARY_LIGHT };
     } else if (index > 0 && index < endIdx) {
       let level = 1 + Math.floor(Math.log(index + 1) / Math.log(2));
       let { value } = num;
-      ref.bars[index] = { value, color: colors[level - 1] };
+      array[index] = { value, color: heapSortColorLevels[level - 1] };
     }
   });
-}
+};
+
+export default heapSort;

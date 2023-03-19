@@ -20,7 +20,21 @@ export enum Algorithm {
 }
 
 export enum Colors {
+  // MAIN
+  PRIMARY = "var(--primary-color)",
   COMPARE = "var(--teal-500)",
   SORTED = "var(--purple-400)",
-  PRIMARY = "var(--primary-color)",
+  PRIMARY_LIGHT = "var(--primary-200)",
+
+  // OTHERS
+  PINK = "var(--pink-300)",
+  RED = "var(--red-300)",
+  ORANGE = "var(--orange-300)",
+  YELLOW = "var(--yellow-300)",
+  GREEN = "var(--green-200)",
+  BLUE = "var(--blue-300)",
+  CYAN = "var(--cyan-400)",
+  INDIGO = "var(--indigo-200)",
+  GRAY = "var(--bluegray-600)",
+  TEAL = "var(--teal-200)",
 }

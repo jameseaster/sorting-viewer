@@ -1,3 +1,4 @@
+import { AnimationAction } from "@/utils/types";
 import type { Bar, Animation } from "@/utils/types";
 
 const mergeSort = (collection: Bar[]) => {
@@ -49,22 +50,22 @@ function mergeArrays(
   // iterate over left and right side of collCopy, comparing values
   while (i <= midIdx && j <= endIdx) {
     // light these up to show that we are comparing these two indexes
-    animations.push({ action: "compare", idx1: i, idx2: j });
+    animations.push({ action: AnimationAction.COMPARE, idx1: i, idx2: j });
     // if index in left side < index on right side
     if (collCopy[i].value < collCopy[j].value) {
       // light these up to show that it is in its final position
       animations.push({
-        action: "overwrite",
         idx1: k,
         value: collCopy[i].value,
+        action: AnimationAction.OVERWRITE,
       });
       collection[k++] = collCopy[i++];
     } else {
       // light these up to show that it is in its final position
       animations.push({
-        action: "overwrite",
         idx1: k,
         value: collCopy[j].value,
+        action: AnimationAction.OVERWRITE,
       });
       collection[k++] = collCopy[j++];
     }
@@ -73,18 +74,18 @@ function mergeArrays(
   while (i <= midIdx) {
     // light these up to show that they are in their final position
     animations.push({
-      action: "overwrite",
       idx1: k,
       value: collCopy[i].value,
+      action: AnimationAction.OVERWRITE,
     });
     collection[k++] = collCopy[i++];
   }
   while (j <= endIdx) {
     // light these up to show that they are in their final position
     animations.push({
-      action: "overwrite",
       idx1: k,
       value: collCopy[j].value,
+      action: AnimationAction.OVERWRITE,
     });
     collection[k++] = collCopy[j++];
   }

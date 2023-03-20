@@ -1,8 +1,14 @@
-import { Algorithm, Colors } from "./types";
 import type { MenuOption } from "./types";
+import { Algorithm, Colors } from "./types";
 
+/**
+ * Number of bars to initialize app with
+ */
 export const INITIAL_BAR_COUNT = 25;
 
+/**
+ * Specific order of colors applied to heap sort levels
+ */
 export const heapSortColorLevels: { [key: number]: string } = {
   1: Colors.PINK,
   2: Colors.RED,
@@ -16,6 +22,9 @@ export const heapSortColorLevels: { [key: number]: string } = {
   10: Colors.TEAL,
 };
 
+/**
+ * Order of dropdown menu options, algorithms for users to select
+ */
 export const menuOptions: MenuOption[] = [
   { value: Algorithm.EMPTY, text: "Select An Algorithm", disabled: true },
   { value: Algorithm.BUBBLE, text: "Bubble Sort" },
@@ -26,6 +35,9 @@ export const menuOptions: MenuOption[] = [
   { value: Algorithm.MERGE, text: "Merge Sort" },
 ];
 
+/**
+ * Info about each algorithm displayed when info icon is clicked
+ */
 export const algoInfo: { [key in Algorithm]: string } = {
   [Algorithm.EMPTY]: "Pick an algorithm from the dropdown menu!",
 

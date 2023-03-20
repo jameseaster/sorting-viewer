@@ -13,17 +13,22 @@ export interface Animation {
   idx1: number;
   idx2?: number;
   value?: number;
-  action: string;
+  action: AnimationAction;
+}
+
+export enum AnimationAction {
+  COMPARE = "compare",
+  OVERWRITE = "overwrite",
 }
 
 export enum Algorithm {
   EMPTY = "empty",
+  HEAP = "heap",
+  QUICK = "quick",
+  MERGE = "merge",
   BUBBLE = "bubble",
   INSERTION = "insertion",
   SELECTION = "selection",
-  QUICK = "quick",
-  HEAP = "heap",
-  MERGE = "merge",
 }
 
 export enum Colors {

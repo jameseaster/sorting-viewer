@@ -12,6 +12,7 @@ import { INITIAL_BAR_COUNT } from "@/utils/constants";
 import insertionSort from "./algorithms/insertionSort.ts";
 import selectionSort from "./algorithms/selectionSort.ts";
 import ThemeSelector from "./components/ThemeSelector.vue";
+import { Colors } from "@/utils/types";
 
 export default {
   name: "App",
@@ -26,9 +27,6 @@ export default {
       bars: [],
       lastAlgo: "",
       quantity: INITIAL_BAR_COUNT,
-      compare: "var(--teal-500)", // TODO: REMOVE
-      sorted: "var(--purple-400)", // TODO: REMOVE
-      primary: "var(--primary-color)", // TODO: REMOVE
     };
   },
   created() {
@@ -45,7 +43,7 @@ export default {
       this.bars = [];
       for (let i = 0; i < this.quantity; i++) {
         let value = Math.round(Math.random() * 280) + 20;
-        let color = this.primary;
+        let color = Colors.PRIMARY;
         this.bars.push({ value, color });
       }
     },
@@ -83,8 +81,8 @@ export default {
           // changes the color of the two indexes being compared
           let { value: val1, color: col1 } = this.bars[todo.idx1];
           let { value: val2, color: col2 } = this.bars[todo.idx2];
-          this.bars[todo.idx1] = { value: val1, color: this.compare };
-          this.bars[todo.idx2] = { value: val2, color: this.compare };
+          this.bars[todo.idx1] = { value: val1, color: Colors.COMPARE };
+          this.bars[todo.idx2] = { value: val2, color: Colors.COMPARE };
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // changes the colors back to original color
@@ -94,7 +92,7 @@ export default {
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // overwrite idx1 with idx2, change color to sorted
-          this.bars[todo.idx1] = { value: todo.value, color: this.sorted };
+          this.bars[todo.idx1] = { value: todo.value, color: Colors.SORTED };
         }
       }
     },

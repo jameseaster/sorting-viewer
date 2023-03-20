@@ -1,3 +1,37 @@
+<script setup>
+import Info from "./Info.vue";
+import { ref, defineEmits } from "vue";
+import BarSlider from "./BarSlider.vue";
+import { useToast } from "primevue/usetoast";
+import { MENU_OPTIONS, ALGORITHMS, DESCRIPTION_BPS } from "@/utils/constants";
+
+// Hooks
+const toast = useToast();
+
+const visible = ref(false);
+const options = ref(MENU_OPTIONS);
+const selected = ref(MENU_OPTIONS[0]);
+const emit = defineEmits([...Object.values(ALGORITHMS), "reset"]);
+
+const toggleShowInfo = () => {
+  visible.value = !visible.value;
+};
+
+const handleClick = (selected) => {
+  const { value } = selected;
+  value === ALGORITHMS.EMPTY ? createToast() : emit(value);
+};
+
+const createToast = () => {
+  toast.add({
+    life: 5000,
+    summary: " ",
+    severity: "info",
+    detail: "Select an algorithm to sort the columns",
+  });
+};
+</script>
+
 <template>
   <div class="controls-container">
     <!-- Dataset Size -->
@@ -31,7 +65,7 @@
         size="large"
         :value="selected"
         icon="pi pi-replay"
-        @click="$emit('new-array')"
+        @click="$emit('reset')"
       />
       <Button
         rounded
@@ -47,7 +81,7 @@
       modal
       :header="selected.text"
       v-model:visible="visible"
-      :breakpoints="{ '960px': '75vw', '641px': '100vw' }"
+      :breakpoints="DESCRIPTION_BPS"
     >
       <Info :name="selected.value" />
     </Dialog>
@@ -56,60 +90,6 @@
     <Toast />
   </div>
 </template>
-
-// TODO: UPDATE TO SETUP TAG
-<script>
-import { ref } from "vue";
-import Info from "./Info.vue";
-import BarSlider from "./BarSlider.vue";
-import { Algorithm } from "../utils/types";
-import { useToast } from "primevue/usetoast";
-import { menuOptions } from "../utils/constants";
-
-export default {
-  name: "Controls",
-  components: { Info, BarSlider },
-  setup() {
-    // Hooks
-    const toast = useToast();
-
-    // Constants
-    const visible = ref(false);
-    const options = ref(menuOptions);
-    const selected = ref(menuOptions[0]);
-
-    // Event handlers
-    const toggleShowInfo = () => {
-      visible.value = !visible.value;
-    };
-
-    const createToast = () => {
-      toast.add({
-        life: 5000,
-        summary: " ",
-        severity: "info",
-        detail: "Select an algorithm to sort the columns",
-      });
-    };
-
-    return {
-      visible,
-      options,
-      selected,
-      createToast,
-      toggleShowInfo,
-    };
-  },
-
-  // TODO: UPDATE TO SETUP TAG
-  methods: {
-    handleClick: function (selected) {
-      const { value } = selected;
-      value === Algorithm.EMPTY ? this.createToast() : this.$emit(value);
-    },
-  },
-};
-</script>
 
 <style scoped>
 .controls-container {

@@ -1,4 +1,5 @@
-import { Colors, type Bar } from "@/utils/types";
+import type { Bar } from "@/utils/types";
+import { COLORS } from "@/utils/constants";
 
 const quickSort = async (
   collection: Bar[],
@@ -10,11 +11,11 @@ const quickSort = async (
     // change the colors of this collection to sorted
     if (collection[startIdx]) {
       let { value } = collection[startIdx];
-      collection[startIdx] = { value, color: Colors.SORTED };
+      collection[startIdx] = { value, color: COLORS.SORTED };
     }
     if (collection[endIdx]) {
       let { value } = collection[endIdx];
-      collection[endIdx] = { value, color: Colors.SORTED };
+      collection[endIdx] = { value, color: COLORS.SORTED };
     }
     return collection;
   }
@@ -28,21 +29,21 @@ const quickSort = async (
   // // start each collection with primary colors
   collection.forEach((num, index) => {
     if (index >= startIdx && index <= endIdx) {
-      num.color = Colors.PRIMARY;
+      num.color = COLORS.PRIMARY;
     }
   });
 
   // set pivot color to be gold
   let { value } = collection[pivot];
-  collection[pivot] = { value, color: Colors.YELLOW };
+  collection[pivot] = { value, color: COLORS.YELLOW };
 
   // while left pointer is less than or equal to right pivot
   while (left <= right) {
     // right and left pointers can be compare color
     let { value: l } = collection[left];
     let { value: r } = collection[right];
-    collection[left] = { value: l, color: Colors.COMPARE };
-    collection[right] = { value: r, color: Colors.COMPARE };
+    collection[left] = { value: l, color: COLORS.COMPARE };
+    collection[right] = { value: r, color: COLORS.COMPARE };
 
     // pauses the event loop to better visualize the algo
     await new Promise((resolve) => setTimeout(resolve, 20));
@@ -62,14 +63,14 @@ const quickSort = async (
     // pivot value is >= left pointer, increase left pointer
     if (collection[pivot].value >= collection[left].value) {
       let { value: newVal } = collection[left];
-      collection[left] = { value: newVal, color: Colors.PRIMARY };
+      collection[left] = { value: newVal, color: COLORS.PRIMARY };
       left += 1;
     }
 
     // pivot value is <= right pointer, decrease right pointer
     if (collection[pivot].value <= collection[right].value) {
       let { value: newVal } = collection[right];
-      collection[right] = { value: newVal, color: Colors.PRIMARY };
+      collection[right] = { value: newVal, color: COLORS.PRIMARY };
       right -= 1;
     }
   }
@@ -80,8 +81,8 @@ const quickSort = async (
   // Swap the values of pivot and right pointer
   let { value: p } = collection[pivot];
   let { value: rValue } = collection[right];
-  collection[pivot] = { value: rValue, color: Colors.COMPARE };
-  collection[right] = { value: p, color: Colors.SORTED };
+  collection[pivot] = { value: rValue, color: COLORS.COMPARE };
+  collection[right] = { value: p, color: COLORS.SORTED };
 
   // find the smaller of the two remaining arrays
   let leftArrayIsSmaller = right - 1 - startIdx < endIdx - right + 1;

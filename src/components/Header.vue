@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <div class="header-container">
     <h1>Sorting Viewer</h1>

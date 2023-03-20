@@ -8,11 +8,15 @@ import heapSort from "./algorithms/heapSort.ts";
 import mergeSort from "./algorithms/mergeSort.ts";
 import quickSort from "./algorithms/quickSort.ts";
 import bubbleSort from "./algorithms/bubbleSort.ts";
-import { INITIAL_BAR_COUNT } from "@/utils/constants";
 import insertionSort from "./algorithms/insertionSort.ts";
 import selectionSort from "./algorithms/selectionSort.ts";
 import ThemeSelector from "./components/ThemeSelector.vue";
-import { Colors } from "@/utils/types";
+import {
+  COLORS,
+  ALGORITHMS,
+  ANIMATION_ACTION,
+  INITIAL_BAR_COUNT,
+} from "@/utils/constants";
 
 export default {
   name: "App",
@@ -43,46 +47,46 @@ export default {
       this.bars = [];
       for (let i = 0; i < this.quantity; i++) {
         let value = Math.round(Math.random() * 280) + 20;
-        let color = Colors.PRIMARY;
+        let color = COLORS.PRIMARY;
         this.bars.push({ value, color });
       }
     },
     bubble: function () {
-      this.lastAlgo = "bubble";
+      this.lastAlgo = ALGORITHMS.BUBBLE;
       bubbleSort(this.bars);
     },
     insertion: function () {
-      this.lastAlgo = "insertion";
+      this.lastAlgo = ALGORITHMS.INSERTION;
       insertionSort(this.bars);
     },
     selection: function () {
-      this.lastAlgo = "selection";
+      this.lastAlgo = ALGORITHMS.SELECTION;
       selectionSort(this.bars);
     },
     quick: function () {
-      this.lastAlgo = "quick";
+      this.lastAlgo = ALGORITHMS.QUICK;
       quickSort(this.bars, 0, this.bars.length - 1);
     },
     heap: function () {
-      this.lastAlgo = "heap";
+      this.lastAlgo = ALGORITHMS.HEAP;
       heapSort(this.bars);
     },
     merge: function () {
-      this.lastAlgo = "merge";
+      this.lastAlgo = ALGORITHMS.MERGE;
       this.animate(mergeSort(this.bars));
     },
     animate: async function (animations) {
       for (let todo of animations) {
-        if (this.lastAlgo !== "merge") {
+        if (this.lastAlgo !== ALGORITHMS.MERGE) {
           break;
         }
 
-        if (todo.action === "compare") {
+        if (todo.action === ANIMATION_ACTION.COMPARE) {
           // changes the color of the two indexes being compared
           let { value: val1, color: col1 } = this.bars[todo.idx1];
           let { value: val2, color: col2 } = this.bars[todo.idx2];
-          this.bars[todo.idx1] = { value: val1, color: Colors.COMPARE };
-          this.bars[todo.idx2] = { value: val2, color: Colors.COMPARE };
+          this.bars[todo.idx1] = { value: val1, color: COLORS.COMPARE };
+          this.bars[todo.idx2] = { value: val2, color: COLORS.COMPARE };
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // changes the colors back to original color
@@ -92,7 +96,7 @@ export default {
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // overwrite idx1 with idx2, change color to sorted
-          this.bars[todo.idx1] = { value: todo.value, color: Colors.SORTED };
+          this.bars[todo.idx1] = { value: todo.value, color: COLORS.SORTED };
         }
       }
     },
@@ -112,6 +116,6 @@ export default {
     @insertion="insertion"
     @selection="selection"
     @changeSize="changeSize"
-    @new-array="populateArray"
+    @reset="populateArray"
   />
 </template>

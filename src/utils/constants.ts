@@ -1,5 +1,4 @@
 import type { MenuOption } from "./types";
-import { Algorithm, Colors } from "./types";
 
 /**
  * Number of bars to initialize app with
@@ -7,41 +6,108 @@ import { Algorithm, Colors } from "./types";
 export const INITIAL_BAR_COUNT = 25;
 
 /**
+ * PrimeVue app themes
+ */
+export const THEMES: { [key: string]: { [key: string]: string } } = {
+  DARK: {
+    name: "dark",
+    icon: "pi pi-sun",
+    file: "bootstrap4-dark-blue",
+  },
+  LIGHT: {
+    name: "light",
+    icon: "pi pi-moon",
+    file: "bootstrap4-light-blue",
+  },
+};
+
+/**
+ * Breakpoints for algorithm description
+ */
+export const DESCRIPTION_BPS: { [key: string]: string } = {
+  "960px": "75vw",
+  "641px": "100vw",
+};
+
+/**
+ * Algorithm names to use throught app
+ */
+export const ANIMATION_ACTION: { [key: string]: string } = {
+  COMPARE: "compare",
+  OVERWRITE: "overwrite",
+};
+
+/**
+ * Algorithm names to use throught app
+ */
+export const ALGORITHMS: { [key: string]: string } = {
+  EMPTY: "empty",
+  HEAP: "heap",
+  QUICK: "quick",
+  MERGE: "merge",
+  BUBBLE: "bubble",
+  INSERTION: "insertion",
+  SELECTION: "selection",
+};
+
+/**
+ * App theme colors
+ */
+export const COLORS: { [key: string]: string } = {
+  // MAIN
+  PRIMARY: "var(--primary-color)",
+  COMPARE: "var(--teal-500)",
+  SORTED: "var(--purple-400)",
+  PRIMARY_LIGHT: "var(--primary-200)",
+  // OTHERS
+  PINK: "var(--pink-300)",
+  RED: "var(--red-300)",
+  ORANGE: "var(--orange-300)",
+  YELLOW: "var(--yellow-300)",
+  GREEN: "var(--green-200)",
+  BLUE: "var(--blue-300)",
+  CYAN: "var(--cyan-400)",
+  INDIGO: "var(--indigo-200)",
+  GRAY: "var(--bluegray-600)",
+  TEAL: "var(--teal-200)",
+};
+
+/**
  * Specific order of colors applied to heap sort levels
  */
-export const heapSortColorLevels: { [key: number]: string } = {
-  1: Colors.PINK,
-  2: Colors.RED,
-  3: Colors.ORANGE,
-  4: Colors.YELLOW,
-  5: Colors.GREEN,
-  6: Colors.BLUE,
-  7: Colors.CYAN,
-  8: Colors.INDIGO,
-  9: Colors.GRAY,
-  10: Colors.TEAL,
+export const HEAP_COLOR_LEVELS: { [key: number]: string } = {
+  1: COLORS.PINK,
+  2: COLORS.RED,
+  3: COLORS.ORANGE,
+  4: COLORS.YELLOW,
+  5: COLORS.GREEN,
+  6: COLORS.BLUE,
+  7: COLORS.CYAN,
+  8: COLORS.INDIGO,
+  9: COLORS.GRAY,
+  10: COLORS.TEAL,
 };
 
 /**
  * Order of dropdown menu options, algorithms for users to select
  */
-export const menuOptions: MenuOption[] = [
-  { value: Algorithm.EMPTY, text: "Select An Algorithm", disabled: true },
-  { value: Algorithm.BUBBLE, text: "Bubble Sort" },
-  { value: Algorithm.INSERTION, text: "Insertion Sort" },
-  { value: Algorithm.SELECTION, text: "Selection Sort" },
-  { value: Algorithm.QUICK, text: "Quick Sort" },
-  { value: Algorithm.HEAP, text: "Heap Sort" },
-  { value: Algorithm.MERGE, text: "Merge Sort" },
+export const MENU_OPTIONS: MenuOption[] = [
+  { value: ALGORITHMS.EMPTY, text: "Select An Algorithm", disabled: true },
+  { value: ALGORITHMS.BUBBLE, text: "Bubble Sort" },
+  { value: ALGORITHMS.INSERTION, text: "Insertion Sort" },
+  { value: ALGORITHMS.SELECTION, text: "Selection Sort" },
+  { value: ALGORITHMS.QUICK, text: "Quick Sort" },
+  { value: ALGORITHMS.HEAP, text: "Heap Sort" },
+  { value: ALGORITHMS.MERGE, text: "Merge Sort" },
 ];
 
 /**
  * Info about each algorithm displayed when info icon is clicked
  */
-export const algoInfo: { [key in Algorithm]: string } = {
-  [Algorithm.EMPTY]: "Pick an algorithm from the dropdown menu!",
+export const ALGO_INFO: { [key: string]: string } = {
+  [ALGORITHMS.EMPTY]: "Pick an algorithm from the dropdown menu!",
 
-  [Algorithm.BUBBLE]: `Bubble sort gets its name because smaller elements
+  [ALGORITHMS.BUBBLE]: `Bubble sort gets its name because smaller elements
   bubble toward the top of their list. This algorithm compares
   two adjacent values. If the first one is larger than the
   second, then it will swap those two values. After repeating
@@ -51,18 +117,18 @@ export const algoInfo: { [key in Algorithm]: string } = {
   is repeated the same number of times as there are values in the
   unsorted list.`,
 
-  [Algorithm.INSERTION]: `Insertion sort works similarly to the way we organize
+  [ALGORITHMS.INSERTION]: `Insertion sort works similarly to the way we organize
   cards in our hand when playing a card game. It compares a value
   with the one to its left and sorts them accordingly. Then it
   continues to the next unsorted value, keeping the collection of
   sorted values to one side and the unsorted values on the other.`,
 
-  [Algorithm.SELECTION]: `Selection sort scans the collection and selects the
+  [ALGORITHMS.SELECTION]: `Selection sort scans the collection and selects the
   smallest value and then moves it to the front of the collection.
   You will see the smallest flagged value turn gold and then moved
   to front, building up a sorted collection from left to right.`,
 
-  [Algorithm.QUICK]: `Quick sort operates with a pivot and two pointers. In
+  [ALGORITHMS.QUICK]: `Quick sort operates with a pivot and two pointers. In
   this app the pivot is colored gold and starts as the value on
   the far left of the collection. The pointers are green and move
   inward. Quick sort compares the values of the two pointers to the
@@ -76,7 +142,7 @@ export const algoInfo: { [key in Algorithm]: string } = {
   either side of the pivot recursively. It very quickly, efficiently,
   and recursively sorts a collection.`,
 
-  [Algorithm.HEAP]: `Heap sort utilizes the heap data structure. In fact, step
+  [ALGORITHMS.HEAP]: `Heap sort utilizes the heap data structure. In fact, step
   one to this algorithm is creating a max heap out of the unsorted
   values. As a rule of thumb, a max heap always pushes the largest
   value to the top of its structure. Heap sort will take the value
@@ -86,7 +152,7 @@ export const algoInfo: { [key in Algorithm]: string } = {
   is repeated until the max heap has handed off all of its values
   to the now sorted collection.`,
 
-  [Algorithm.MERGE]: `Merge sort takes the approach of "divide and conquer." To
+  [ALGORITHMS.MERGE]: `Merge sort takes the approach of "divide and conquer." To
   start, it divides the collection in two. And then divides those
   collections in two, and continues to do this until it only contains
   collections that each contain one value. A collection with only

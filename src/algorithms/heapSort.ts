@@ -1,5 +1,5 @@
-import { Colors, type Bar } from "@/utils/types";
-import { heapSortColorLevels } from "@/utils/constants";
+import type { Bar } from "@/utils/types";
+import { COLORS, HEAP_COLOR_LEVELS } from "@/utils/constants";
 
 const heapSort = async (collection: Bar[]) => {
   // build max heap
@@ -12,13 +12,13 @@ const heapSort = async (collection: Bar[]) => {
     siftDown(0, endIdx - 1, collection);
     // change the color of the endIdx, its in its sorted position
     let { value } = collection[endIdx];
-    collection[endIdx] = { value, color: Colors.SORTED };
+    collection[endIdx] = { value, color: COLORS.SORTED };
     // pauses the event loop to better visualize the algo
     await new Promise((resolve) => setTimeout(resolve, 80));
   }
   // change the color of the first, its in its sorted position
   let { value } = collection[0];
-  collection[0] = { value, color: Colors.SORTED };
+  collection[0] = { value, color: COLORS.SORTED };
   return collection;
 };
 
@@ -78,11 +78,11 @@ const colorLevels = (collection: Bar[], endIdx: number) => {
   collection.forEach((num, index) => {
     if (index === 0) {
       let { value } = num;
-      collection[index] = { value, color: Colors.PRIMARY_LIGHT };
+      collection[index] = { value, color: COLORS.PRIMARY_LIGHT };
     } else if (index > 0 && index < endIdx) {
       let level = 1 + Math.floor(Math.log(index + 1) / Math.log(2));
       let { value } = num;
-      collection[index] = { value, color: heapSortColorLevels[level - 1] };
+      collection[index] = { value, color: HEAP_COLOR_LEVELS[level - 1] };
     }
   });
 };

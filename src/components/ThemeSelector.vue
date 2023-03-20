@@ -7,10 +7,12 @@
     @click="toggleTheme"
     style="margin-left: auto"
   />
-  <link :id="link" rel="stylesheet" href="/bootstrap4-light-blue/theme.css" />
+  <link :id="link" rel="stylesheet" :href="hrefConstant" />
 </template>
 
 <script>
+import { THEMES } from "@/utils/constants";
+
 export default {
   name: "ThemeSelector",
   data() {
@@ -18,20 +20,19 @@ export default {
       icon: "",
       theme: "",
       link: "theme-link",
-      light: {
-        name: "light",
-        file: "bootstrap4-light-blue",
-        icon: "pi pi-moon",
-      },
-      dark: {
-        name: "dark",
-        file: "bootstrap4-dark-blue",
-        icon: "pi pi-sun",
-      },
+      dark: THEMES.DARK,
+      light: THEMES.LIGHT,
     };
   },
   mounted() {
+    // Starts in light mode
     this.toLight();
+  },
+  computed: {
+    hrefConstant() {
+      // Starts in light mode
+      return `/${this.light.file}/theme.css`;
+    },
   },
   methods: {
     toggleTheme() {

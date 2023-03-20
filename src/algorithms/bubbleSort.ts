@@ -1,9 +1,10 @@
-import { Colors, type Bar } from "@/utils/types";
+import type { Bar } from "@/utils/types";
+import { COLORS } from "@/utils/constants";
 
 const bubbleSort = async (collection: Bar[]) => {
   // change the color to primary to start sorting algorithm
   collection.forEach((num, i) => {
-    collection[i] = { value: num.value, color: Colors.PRIMARY };
+    collection[i] = { value: num.value, color: COLORS.PRIMARY };
   });
 
   let counter = 0;
@@ -15,8 +16,8 @@ const bubbleSort = async (collection: Bar[]) => {
       // change color of two indeces that are being compared
       let { value: a } = collection[i];
       let { value: b } = collection[i + 1];
-      collection[i] = { value: a, color: Colors.COMPARE };
-      collection[i + 1] = { value: b, color: Colors.COMPARE };
+      collection[i] = { value: a, color: COLORS.COMPARE };
+      collection[i + 1] = { value: b, color: COLORS.COMPARE };
 
       // pauses the event loop to better visualize the algo
       await new Promise((resolve) => setTimeout(resolve, 30));
@@ -34,15 +35,15 @@ const bubbleSort = async (collection: Bar[]) => {
       // change colors back to primary and set the final index color to sorted
       let { value: newA } = collection[i];
       let { value: newB } = collection[i + 1];
-      collection[i] = { value: newA, color: Colors.PRIMARY };
-      collection[i + 1] = { value: newB, color: Colors.SORTED };
+      collection[i] = { value: newA, color: COLORS.PRIMARY };
+      collection[i + 1] = { value: newB, color: COLORS.SORTED };
     }
     // increment counter
     counter += 1;
   }
   // change the color to sorted on the final iteration
   collection.forEach((num, i) => {
-    collection[i] = { value: num.value, color: Colors.SORTED };
+    collection[i] = { value: num.value, color: COLORS.SORTED };
   });
 };
 

@@ -3,21 +3,18 @@ body,
 #app {
   margin: 0;
   height: 100%;
+  display: flex;
+  font-size: 15px;
+  overflow-y: auto;
   font-weight: normal;
   overflow-x: hidden;
-  overflow-y: auto;
-  font-weight: 400;
+  flex-direction: column;
+
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
   color: var(--text-color);
   font-family: var(--font-family);
   background-color: var(--surface-a);
-}
-
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  font-size: 15px;
-  text-align: center;
-  flex-direction: column;
-  text-rendering: optimizeLegibility;
 }

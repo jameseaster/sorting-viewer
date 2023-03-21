@@ -1,6 +1,11 @@
 import type { MenuOption } from "./types";
 
 /**
+ * App title
+ */
+export const TITLE = "Sorting Viewer";
+
+/**
  * Number of bars to initialize app with
  */
 export const INITIAL_BAR_COUNT = 25;
@@ -59,6 +64,7 @@ export const COLORS: { [key: string]: string } = {
   COMPARE: "var(--teal-500)",
   SORTED: "var(--purple-400)",
   PRIMARY_LIGHT: "var(--primary-200)",
+  BG_COLOR: "var(--surface-a)",
   // OTHERS
   PINK: "var(--pink-300)",
   RED: "var(--red-300)",

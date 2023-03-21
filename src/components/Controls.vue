@@ -1,4 +1,5 @@
 <script setup>
+// Imports
 import Info from "./Info.vue";
 import { ref, defineEmits } from "vue";
 import BarSlider from "./BarSlider.vue";
@@ -8,20 +9,24 @@ import { MENU_OPTIONS, ALGORITHMS, DESCRIPTION_BPS } from "@/utils/constants";
 // Hooks
 const toast = useToast();
 
+// State
 const visible = ref(false);
 const options = ref(MENU_OPTIONS);
 const selected = ref(MENU_OPTIONS[0]);
 const emit = defineEmits([...Object.values(ALGORITHMS), "reset"]);
 
+// Toggle info
 const toggleShowInfo = () => {
   visible.value = !visible.value;
 };
 
+// Fire selected algorithm
 const handleClick = (selected) => {
   const { value } = selected;
   value === ALGORITHMS.EMPTY ? createToast() : emit(value);
 };
 
+// Create toast notification
 const createToast = () => {
   toast.add({
     life: 5000,

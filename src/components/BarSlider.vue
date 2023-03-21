@@ -10,7 +10,7 @@ const { updateBarCount } = useBarCount();
 // Constants
 const min = ref(5);
 const step = ref(1);
-const quantity = ref(INITIAL_BAR_COUNT);
+const sliderValue = ref(INITIAL_BAR_COUNT);
 
 // Computed
 const maxSize = computed(() => {
@@ -20,10 +20,7 @@ const maxSize = computed(() => {
 });
 
 // Watchers
-watch(quantity, (newValue) => {
-  console.log("this ran", newValue);
-  updateBarCount(newValue);
-});
+watch(sliderValue, (newValue) => updateBarCount(newValue));
 </script>
 
 <template>
@@ -35,10 +32,10 @@ watch(quantity, (newValue) => {
         :step="step"
         :max="maxSize"
         class="w-14rem"
-        v-model="quantity"
+        v-model="sliderValue"
       />
     </div>
-    <p>{{ quantity }}</p>
+    <p>{{ sliderValue }}</p>
   </div>
 </template>
 

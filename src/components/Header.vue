@@ -1,8 +1,12 @@
 <template>
   <div class="header-container">
-    <h1>Sorting Viewer</h1>
+    <h1>{{ TITLE }}</h1>
   </div>
 </template>
+
+<script setup lang="ts">
+import { TITLE } from "@/utils/constants";
+</script>
 
 <style scoped>
 .header-container {

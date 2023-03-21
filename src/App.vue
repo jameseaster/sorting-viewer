@@ -17,6 +17,7 @@ import {
   ANIMATION_ACTION,
   INITIAL_BAR_COUNT,
 } from "@/utils/constants";
+import { ref, onMounted } from "vue";
 
 export default {
   name: "App",
@@ -26,80 +27,97 @@ export default {
     Controls,
     ThemeSelector,
   },
-  data() {
-    return {
-      bars: [],
-      lastAlgo: "",
-      quantity: INITIAL_BAR_COUNT,
+  setup() {
+    const bars = ref([]);
+    const lastAlgo = ref("");
+    const quantity = ref(INITIAL_BAR_COUNT);
+
+    onMounted(() => {
+      // TODO: STOP SORTING, THEN POPULATE ARRAY
+      populateArray();
+    });
+
+    const changeSize = (number) => {
+      quantity.value = number;
+      populateArray();
     };
-  },
-  created() {
-    // TODO: STOP SORTING, THEN POPULATE ARRAY
-    this.populateArray();
-  },
-  methods: {
-    changeSize: function (number) {
-      this.quantity = number;
-      this.populateArray();
-    },
-    populateArray: function () {
-      this.lastAlgo = "";
-      this.bars = [];
-      for (let i = 0; i < this.quantity; i++) {
+
+    const populateArray = () => {
+      lastAlgo.value = "";
+      bars.value = [];
+      for (let i = 0; i < quantity.value; i++) {
         let value = Math.round(Math.random() * 280) + 20;
         let color = COLORS.PRIMARY;
-        this.bars.push({ value, color });
+        bars.value.push({ value, color });
       }
-    },
-    bubble: function () {
-      this.lastAlgo = ALGORITHMS.BUBBLE;
-      bubbleSort(this.bars);
-    },
-    insertion: function () {
-      this.lastAlgo = ALGORITHMS.INSERTION;
-      insertionSort(this.bars);
-    },
-    selection: function () {
-      this.lastAlgo = ALGORITHMS.SELECTION;
-      selectionSort(this.bars);
-    },
-    quick: function () {
-      this.lastAlgo = ALGORITHMS.QUICK;
-      quickSort(this.bars, 0, this.bars.length - 1);
-    },
-    heap: function () {
-      this.lastAlgo = ALGORITHMS.HEAP;
-      heapSort(this.bars);
-    },
-    merge: function () {
-      this.lastAlgo = ALGORITHMS.MERGE;
-      this.animate(mergeSort(this.bars));
-    },
-    animate: async function (animations) {
+    };
+
+    const bubble = () => {
+      lastAlgo.value = ALGORITHMS.BUBBLE;
+      bubbleSort(bars);
+    };
+
+    const insertion = () => {
+      lastAlgo.value = ALGORITHMS.INSERTION;
+      insertionSort(bars);
+    };
+    const selection = () => {
+      lastAlgo.value = ALGORITHMS.SELECTION;
+      selectionSort(bars);
+    };
+    const quick = () => {
+      lastAlgo.value = ALGORITHMS.QUICK;
+      quickSort(bars, 0, bars.length - 1);
+    };
+    const heap = () => {
+      lastAlgo.value = ALGORITHMS.HEAP;
+      heapSort(bars);
+    };
+    const merge = () => {
+      lastAlgo.value = ALGORITHMS.MERGE;
+      this.animate(mergeSort(bars));
+    };
+
+    const animate = async (animations) => {
       for (let todo of animations) {
-        if (this.lastAlgo !== ALGORITHMS.MERGE) {
+        if (lastAlgo.value !== ALGORITHMS.MERGE) {
           break;
         }
 
         if (todo.action === ANIMATION_ACTION.COMPARE) {
           // changes the color of the two indexes being compared
-          let { value: val1, color: col1 } = this.bars[todo.idx1];
-          let { value: val2, color: col2 } = this.bars[todo.idx2];
-          this.bars[todo.idx1] = { value: val1, color: COLORS.COMPARE };
-          this.bars[todo.idx2] = { value: val2, color: COLORS.COMPARE };
+          let { value: val1, color: col1 } = bars.value[todo.idx1];
+          let { value: val2, color: col2 } = bars.value[todo.idx2];
+          bars.value[todo.idx1] = { value: val1, color: COLORS.COMPARE };
+          bars.value[todo.idx2] = { value: val2, color: COLORS.COMPARE };
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // changes the colors back to original color
-          this.bars[todo.idx1] = { value: val1, color: col1 };
-          this.bars[todo.idx2] = { value: val2, color: col2 };
+          bars.value[todo.idx1] = { value: val1, color: col1 };
+          bars.value[todo.idx2] = { value: val2, color: col2 };
         } else {
           // pauses the event loop to better visualize the algo
           await new Promise((resolve) => setTimeout(resolve, 30));
           // overwrite idx1 with idx2, change color to sorted
-          this.bars[todo.idx1] = { value: todo.value, color: COLORS.SORTED };
+          bars.value[todo.idx1] = { value: todo.value, color: COLORS.SORTED };
         }
       }
-    },
+    };
+
+    return {
+      bars,
+      lastAlgo,
+      quantity,
+      bubble,
+      insertion,
+      selection,
+      quick,
+      heap,
+      merge,
+      animate,
+      populateArray,
+      changeSize,
+    };
   },
 };
 </script>

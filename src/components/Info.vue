@@ -1,27 +1,26 @@
 <template>
-  <p class="info">{{ getInformation(name) }}</p>
+  <p class="info">{{ algoInfo }}</p>
 </template>
 
-<script>
+<script setup lang="ts">
+// Imports
+import { computed } from "@vue/runtime-core";
 import { ALGO_INFO, ALGORITHMS } from "@/utils/constants";
 
-export default {
-  name: "Info",
-  props: {
-    name: { type: String, default: ALGORITHMS.EMPTY },
-  },
-  setup() {
-    const getInformation = (name) => {
-      return ALGO_INFO[name];
-    };
-    return { getInformation };
-  },
-};
+// Props
+const props = withDefaults(defineProps<{ name: string }>(), {
+  name: ALGORITHMS.EMPTY,
+});
+
+// Computed
+const algoInfo = computed(() => {
+  return ALGO_INFO[props.name];
+});
 </script>
 
 <style scoped>
 .info {
-  margin: 24px;
+  margin: 12px;
   max-width: 500px;
 }
 </style>

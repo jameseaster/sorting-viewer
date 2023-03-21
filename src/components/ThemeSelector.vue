@@ -10,46 +10,47 @@
   <link :id="link" rel="stylesheet" :href="hrefConstant" />
 </template>
 
-<script>
+<script setup lang='ts'>
 import { THEMES } from "@/utils/constants";
+import { usePrimeVue } from "primevue/config";
+import { ref, computed, onMounted } from "vue";
 
-export default {
-  name: "ThemeSelector",
-  data() {
-    return {
-      icon: "",
-      theme: "",
-      link: "theme-link",
-      dark: THEMES.DARK,
-      light: THEMES.LIGHT,
-    };
-  },
-  mounted() {
-    // Starts in light mode
-    this.toLight();
-  },
-  computed: {
-    hrefConstant() {
-      // Starts in light mode
-      return `/${this.light.file}/theme.css`;
-    },
-  },
-  methods: {
-    toggleTheme() {
-      const { light, dark, link, toLight, toDark } = this;
-      this.theme === light.name
-        ? this.$primevue.changeTheme(light.file, dark.file, link, toDark)
-        : this.$primevue.changeTheme(dark.file, light.file, link, toLight);
-    },
-    toDark() {
-      this.theme = this.dark.name;
-      this.icon = this.dark.icon;
-    },
-    toLight() {
-      this.theme = this.light.name;
-      this.icon = this.light.icon;
-    },
-  },
+// Hooks (
+const PrimeVue: any = usePrimeVue(); /* not typed with changeTheme */
+
+// State
+const icon = ref("");
+const theme = ref("");
+const link = ref("theme-link");
+const dark = ref(THEMES.DARK);
+const light = ref(THEMES.LIGHT);
+
+// Start in light mode
+onMounted(() => toLight());
+
+// Start in light mode
+const hrefConstant = computed(() => {
+  return `/${light.value.file}/theme.css`;
+});
+
+// Update local theme name and icon to light
+const toLight = () => {
+  theme.value = light.value.name;
+  icon.value = light.value.icon;
+};
+
+// Update local theme name and icon to dark
+const toDark = () => {
+  theme.value = dark.value.name;
+  icon.value = dark.value.icon;
+};
+
+const toggleTheme = () => {
+  const isLightTheme = theme.value === light.value.name;
+  const prevTheme = isLightTheme ? light.value.file : dark.value.file;
+  const newTheme = isLightTheme ? dark.value.file : light.value.file;
+  const callback = isLightTheme ? toDark : toLight;
+  PrimeVue.changeTheme(prevTheme, newTheme, link.value, callback);
 };
 </script>
 

@@ -1,4 +1,20 @@
-<script setup>
+<template>
+  <div class="slider-container">
+    <p>Size</p>
+    <div class="slider">
+      <Slider
+        :min="min"
+        :step="step"
+        :max="maxSize"
+        class="w-14rem"
+        v-model="sliderValue"
+      />
+    </div>
+    <p>{{ sliderValue }}</p>
+  </div>
+</template>
+
+<script setup lang="ts">
 // Imports
 import { computed, ref, watch } from "vue";
 import { INITIAL_BAR_COUNT } from "@/utils/constants";
@@ -22,22 +38,6 @@ const maxSize = computed(() => {
 // Watchers
 watch(sliderValue, (newValue) => updateBarCount(newValue));
 </script>
-
-<template>
-  <div class="slider-container">
-    <p>Size</p>
-    <div class="slider">
-      <Slider
-        :min="min"
-        :step="step"
-        :max="maxSize"
-        class="w-14rem"
-        v-model="sliderValue"
-      />
-    </div>
-    <p>{{ sliderValue }}</p>
-  </div>
-</template>
 
 <style scoped>
 .slider-container {

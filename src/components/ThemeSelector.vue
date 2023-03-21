@@ -7,31 +7,21 @@
     @click="toggleTheme"
     style="margin-left: auto"
   />
-  <link :id="link" rel="stylesheet" :href="hrefConstant" />
 </template>
 
 <script setup lang='ts'>
 import { THEMES } from "@/utils/constants";
-import { usePrimeVue } from "primevue/config";
 import { ref, computed, onMounted } from "vue";
-
-// Hooks (
-const PrimeVue: any = usePrimeVue(); /* not typed with changeTheme */
+import { manuallyUpdateTheme } from "@/utils/helpers";
 
 // State
 const icon = ref("");
 const theme = ref("");
-const link = ref("theme-link");
 const dark = ref(THEMES.DARK);
 const light = ref(THEMES.LIGHT);
 
 // Start in light mode
 onMounted(() => toLight());
-
-// Start in light mode
-const hrefConstant = computed(() => {
-  return `/${light.value.file}/theme.css`;
-});
 
 // Update local theme name and icon to light
 const toLight = () => {
@@ -46,15 +36,14 @@ const toDark = () => {
 };
 
 const toggleTheme = () => {
-  const isLightTheme = theme.value === light.value.name;
-  const prevTheme = isLightTheme ? light.value.file : dark.value.file;
-  const newTheme = isLightTheme ? dark.value.file : light.value.file;
-  const callback = isLightTheme ? toDark : toLight;
-  PrimeVue.changeTheme(prevTheme, newTheme, link.value, callback);
+  const isLight = theme.value === light.value.name;
+  const callback = isLight ? toDark : toLight;
+  manuallyUpdateTheme(isLight);
+  callback();
 };
 </script>
 
-<style scoped>
+<style>
 .theme-icon {
   margin: 8px;
 }

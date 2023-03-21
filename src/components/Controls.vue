@@ -29,7 +29,6 @@
         rounded
         outlined
         size="large"
-        :value="selected"
         icon="pi pi-replay"
         @click="$emit('reset')"
       />

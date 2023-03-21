@@ -1,5 +1,5 @@
 import { ANIMATION_ACTION } from "@/utils/constants";
-import type { Bar, Animations } from "@/utils/types";
+import type { Bar, Animations, Compare } from "@/utils/types";
 
 const mergeSort = (collection: Bar[]) => {
   // a collection to hold a list of all of the animations
@@ -50,7 +50,11 @@ function mergeArrays(
   // iterate over left and right side of collCopy, comparing values
   while (i <= midIdx && j <= endIdx) {
     // light these up to show that we are comparing these two indexes
-    animations.push({ action: ANIMATION_ACTION.COMPARE, idx1: i, idx2: j });
+    animations.push({
+      action: ANIMATION_ACTION.COMPARE,
+      idx1: i,
+      idx2: j,
+    } as Compare);
     // if index in left side < index on right side
     if (collCopy[i].value < collCopy[j].value) {
       // light these up to show that it is in its final position

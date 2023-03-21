@@ -56,6 +56,20 @@ export const ALGORITHMS: { [key: string]: string } = {
 };
 
 /**
+ * Event names to emit from controls component
+ */
+export const ALGO_EMITS: string[] = [
+  ALGORITHMS.EMPTY,
+  ALGORITHMS.HEAP,
+  ALGORITHMS.QUICK,
+  ALGORITHMS.MERGE,
+  ALGORITHMS.BUBBLE,
+  ALGORITHMS.INSERTION,
+  ALGORITHMS.SELECTION,
+  "reset",
+];
+
+/**
  * App theme colors
  */
 export const COLORS: { [key: string]: string } = {

@@ -1,42 +1,3 @@
-<script setup>
-// Imports
-import Info from "./Info.vue";
-import { ref, defineEmits } from "vue";
-import BarSlider from "./BarSlider.vue";
-import { useToast } from "primevue/usetoast";
-import { MENU_OPTIONS, ALGORITHMS, DESCRIPTION_BPS } from "@/utils/constants";
-
-// Hooks
-const toast = useToast();
-
-// State
-const visible = ref(false);
-const options = ref(MENU_OPTIONS);
-const selected = ref(MENU_OPTIONS[0]);
-const emit = defineEmits([...Object.values(ALGORITHMS), "reset"]);
-
-// Toggle info
-const toggleShowInfo = () => {
-  visible.value = !visible.value;
-};
-
-// Fire selected algorithm
-const handleClick = (selected) => {
-  const { value } = selected;
-  value === ALGORITHMS.EMPTY ? createToast() : emit(value);
-};
-
-// Create toast notification
-const createToast = () => {
-  toast.add({
-    life: 5000,
-    summary: " ",
-    severity: "info",
-    detail: "Select an algorithm to sort the columns",
-  });
-};
-</script>
-
 <template>
   <div class="controls-container">
     <!-- Dataset Size -->
@@ -86,7 +47,7 @@ const createToast = () => {
       modal
       :header="selected.text"
       v-model:visible="visible"
-      :breakpoints="DESCRIPTION_BPS"
+      :breakpoints="constants.DESCRIPTION_BPS"
     >
       <Info :name="selected.value" />
     </Dialog>
@@ -95,6 +56,46 @@ const createToast = () => {
     <Toast />
   </div>
 </template>
+
+<script setup lang="ts">
+// Imports
+import { ref } from "vue";
+import Info from "@/components/Info.vue";
+import { useToast } from "primevue/usetoast";
+import * as constants from "@/utils/constants";
+import type { MenuOption } from "@/utils/types";
+import BarSlider from "@/components/BarSlider.vue";
+
+// Hooks
+const toast = useToast();
+
+// State
+const visible = ref(false);
+const options = ref(constants.MENU_OPTIONS);
+const selected = ref(constants.MENU_OPTIONS[0]);
+const emit = defineEmits(constants.ALGO_EMITS);
+
+// Toggle info
+const toggleShowInfo = () => {
+  visible.value = !visible.value;
+};
+
+// Fire selected algorithm
+const handleClick = (selected: MenuOption) => {
+  const { value } = selected;
+  value === constants.ALGORITHMS.EMPTY ? createToast() : emit(value);
+};
+
+// Create toast notification
+const createToast = () => {
+  toast.add({
+    life: 5000,
+    summary: " ",
+    severity: "info",
+    detail: "Select an algorithm to sort the columns",
+  });
+};
+</script>
 
 <style scoped>
 .controls-container {

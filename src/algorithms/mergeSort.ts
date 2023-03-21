@@ -1,12 +1,12 @@
-import type { Bar, Animation } from "@/utils/types";
 import { ANIMATION_ACTION } from "@/utils/constants";
+import type { Bar, Animations } from "@/utils/types";
 
 const mergeSort = (collection: Bar[]) => {
-  // an collection to hold a list of all of the animations
-  const animations: Animation[] = [];
+  // a collection to hold a list of all of the animations
+  const animations: Animations = [];
   collection = [...collection];
-  // if collection is 1 index or fewer, return
-  if (collection.length <= 1) return collection;
+  // if collection is 1 index or fewer, it's sorted
+  if (collection.length <= 1) return animations;
   // create a copy of collection
   let collCopy = [...collection];
   // splits and swaps the arrays, also creates midIdx pointer
@@ -20,7 +20,7 @@ function mergeSortHelper(
   startIdx: number,
   endIdx: number,
   collCopy: Bar[],
-  animations: Animation[]
+  animations: Animations
 ) {
   // if startIdx equals endIdx, return
   if (startIdx === endIdx) return;
@@ -39,7 +39,7 @@ function mergeArrays(
   midIdx: number,
   endIdx: number,
   collCopy: Bar[],
-  animations: Animation[]
+  animations: Animations
 ) {
   // beginning of left portion of collection
   let i = startIdx;

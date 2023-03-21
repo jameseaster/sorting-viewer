@@ -13,19 +13,20 @@
   />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from "vue";
 import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
+import heapSort from "./algorithms/heapSort";
+import mergeSort from "./algorithms/mergeSort";
+import quickSort from "./algorithms/quickSort";
+import bubbleSort from "./algorithms/bubbleSort";
 import Controls from "./components/Controls.vue";
-import heapSort from "./algorithms/heapSort.ts";
-import mergeSort from "./algorithms/mergeSort.ts";
-import quickSort from "./algorithms/quickSort.ts";
-import bubbleSort from "./algorithms/bubbleSort.ts";
 import { useBarCount } from "@/composables/barCount";
-import insertionSort from "./algorithms/insertionSort.ts";
-import selectionSort from "./algorithms/selectionSort.ts";
+import insertionSort from "./algorithms/insertionSort";
+import selectionSort from "./algorithms/selectionSort";
 import ThemeSelector from "./components/ThemeSelector.vue";
+import type { Animations, Compare, Overwrite } from "@/utils/types";
 import { COLORS, ALGORITHMS, ANIMATION_ACTION } from "@/utils/constants";
 
 const { createNewBarList, lastAlgo, bars } = useBarCount();
@@ -54,16 +55,23 @@ const heap = () => {
 };
 const merge = () => {
   lastAlgo.value = ALGORITHMS.MERGE;
-  animate(mergeSort(bars.value));
+  const animations = mergeSort(bars.value);
+  animate(animations);
 };
 
-const animate = async (animations) => {
+const animate = async (animations: Animations) => {
   for (let todo of animations) {
     if (lastAlgo.value !== ALGORITHMS.MERGE) {
       break;
     }
 
-    if (todo.action === ANIMATION_ACTION.COMPARE) {
+    const isComparativeAnimation = (
+      animation: Compare | Overwrite
+    ): animation is Compare => {
+      return todo.action === "compare";
+    };
+
+    if (isComparativeAnimation(todo)) {
       // changes the color of the two indexes being compared
       let { value: val1, color: col1 } = bars.value[todo.idx1];
       let { value: val2, color: col2 } = bars.value[todo.idx2];

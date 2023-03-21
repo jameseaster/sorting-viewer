@@ -9,9 +9,16 @@ export interface MenuOption {
   disabled?: boolean;
 }
 
-export interface Animation {
+export interface Overwrite {
   idx1: number;
-  idx2?: number;
-  value?: number;
+  value: number;
   action: string;
 }
+
+export interface Compare {
+  idx1: number;
+  idx2: number;
+  action: "compare";
+}
+
+export type Animations = (Overwrite | Compare)[];

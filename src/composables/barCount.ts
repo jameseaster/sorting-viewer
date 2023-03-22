@@ -5,6 +5,7 @@ import { COLORS, INITIAL_BAR_COUNT } from "@/utils/constants";
 // Global State
 const lastAlgo = ref("");
 const bars = ref<Bar[]>([]);
+const isSorting = ref(false);
 const quantity = ref(INITIAL_BAR_COUNT);
 
 export function useBarCount() {
@@ -20,14 +21,21 @@ export function useBarCount() {
     bars.value = [];
     for (let i = 0; i < quantity.value; i++) {
       let value = Math.round(Math.random() * 280) + 20;
-      let color = COLORS.PRIMARY;
-      bars.value.push({ value, color });
+      bars.value.push({ value, color: COLORS.PRIMARY });
     }
+    isSorting.value = false;
   };
 
   // Create initial list of bars
   onMounted(() => createNewBarList());
 
   // expose managed state as return value
-  return { createNewBarList, bars, lastAlgo, quantity, updateBarCount };
+  return {
+    bars,
+    lastAlgo,
+    quantity,
+    isSorting,
+    updateBarCount,
+    createNewBarList,
+  };
 }

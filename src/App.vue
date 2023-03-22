@@ -1,20 +1,6 @@
-<template>
-  <ThemeSelector />
-  <Header />
-  <Data />
-  <Controls
-    @heap="heap"
-    @quick="quick"
-    @merge="merge"
-    @bubble="bubble"
-    @insertion="insertion"
-    @selection="selection"
-    @reset="createNewBarList"
-  />
-</template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import heapSort from "./algorithms/heapSort";
@@ -29,34 +15,52 @@ import ThemeSelector from "./components/ThemeSelector.vue";
 import type { Animations, Compare, Overwrite } from "@/utils/types";
 import { COLORS, ALGORITHMS, ANIMATION_ACTION } from "@/utils/constants";
 
-const { createNewBarList, lastAlgo, bars } = useBarCount();
+const { isSorting, createNewBarList, lastAlgo, bars } = useBarCount();
 
-const bubble = () => {
+const bubble = async () => {
+  bars.value = bars.value.map((b) => ({ ...b, color: COLORS.PRIMARY }));
+  isSorting.value = true;
   lastAlgo.value = ALGORITHMS.BUBBLE;
-  bubbleSort(bars.value);
+  await bubbleSort(bars.value);
+  isSorting.value = false;
 };
 
-const insertion = () => {
+const insertion = async () => {
+  bars.value = bars.value.map((b) => ({ ...b, color: COLORS.PRIMARY }));
+  isSorting.value = true;
   lastAlgo.value = ALGORITHMS.INSERTION;
-  insertionSort(bars.value);
+  await insertionSort(bars.value);
+  isSorting.value = false;
 };
 
-const selection = () => {
+const selection = async () => {
+  bars.value = bars.value.map((b) => ({ ...b, color: COLORS.PRIMARY }));
+  isSorting.value = true;
   lastAlgo.value = ALGORITHMS.SELECTION;
-  selectionSort(bars.value);
+  await selectionSort(bars.value);
+  isSorting.value = false;
 };
-const quick = () => {
+const quick = async () => {
+  bars.value = bars.value.map((b) => ({ ...b, color: COLORS.PRIMARY }));
+  isSorting.value = true;
   lastAlgo.value = ALGORITHMS.QUICK;
-  quickSort(bars.value, 0, bars.value.length - 1);
+  await quickSort(bars.value, 0, bars.value.length - 1);
+  isSorting.value = false;
 };
-const heap = () => {
+const heap = async () => {
+  bars.value = bars.value.map((b) => ({ ...b, color: COLORS.PRIMARY }));
+  isSorting.value = true;
   lastAlgo.value = ALGORITHMS.HEAP;
-  heapSort(bars.value);
+  await heapSort(bars.value);
+  isSorting.value = false;
 };
-const merge = () => {
+const merge = async () => {
+  bars.value = bars.value.map((b) => ({ ...b, color: COLORS.PRIMARY }));
+  isSorting.value = true;
   lastAlgo.value = ALGORITHMS.MERGE;
   const animations = mergeSort(bars.value);
-  animate(animations);
+  await animate(animations);
+  isSorting.value = false;
 };
 
 const animate = async (animations: Animations) => {
@@ -91,3 +95,19 @@ const animate = async (animations: Animations) => {
   }
 };
 </script>
+
+<template>
+  <ThemeSelector />
+  <Header />
+  <Data />
+  <Controls
+    :isSorting="isSorting"
+    @heap="heap"
+    @quick="quick"
+    @merge="merge"
+    @bubble="bubble"
+    @insertion="insertion"
+    @selection="selection"
+    @reset="createNewBarList"
+  />
+</template>

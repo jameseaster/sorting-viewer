@@ -23,6 +23,7 @@
         outlined
         size="large"
         icon="pi pi-play"
+        :disabled="props.isSorting"
         @click="handleClick(selected)"
       />
       <Button
@@ -58,7 +59,7 @@
 
 <script setup lang="ts">
 // Imports
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
 import Info from "@/components/Info.vue";
 import { useToast } from "primevue/usetoast";
 import * as constants from "@/utils/constants";
@@ -73,6 +74,9 @@ const visible = ref(false);
 const options = ref(constants.MENU_OPTIONS);
 const selected = ref(constants.MENU_OPTIONS[0]);
 const emit = defineEmits(constants.ALGO_EMITS);
+
+// Props
+const props = defineProps<{ isSorting: Ref<boolean> }>();
 
 // Toggle info
 const toggleShowInfo = () => {

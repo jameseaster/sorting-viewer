@@ -12,7 +12,7 @@ import { TITLE } from "@/utils/constants";
 .header-container {
   width: 100%;
   display: flex;
-  margin-top: 3%;
+  margin-bottom: 2%;
   align-content: center;
   justify-content: center;
 }

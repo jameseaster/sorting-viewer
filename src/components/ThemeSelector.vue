@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang='ts'>
+// Imports
 import { THEMES } from "@/utils/constants";
 import { ref, computed, onMounted } from "vue";
 import { manuallyUpdateTheme } from "@/utils/helpers";
@@ -37,9 +38,9 @@ const toDark = () => {
 
 const toggleTheme = () => {
   const isLight = theme.value === light.value.name;
-  const callback = isLight ? toDark : toLight;
+  const updateThemeVariables = isLight ? toDark : toLight;
   manuallyUpdateTheme(isLight);
-  callback();
+  updateThemeVariables();
 };
 </script>
 

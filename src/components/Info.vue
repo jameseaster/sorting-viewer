@@ -13,9 +13,7 @@ const props = withDefaults(defineProps<{ name: string }>(), {
 });
 
 // Computed
-const algoInfo = computed(() => {
-  return ALGO_INFO[props.name];
-});
+const algoInfo = computed(() => ALGO_INFO[props.name]);
 </script>
 
 <style scoped>

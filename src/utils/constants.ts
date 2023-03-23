@@ -1,3 +1,4 @@
+// Imports
 import type { MenuOption } from "./types";
 
 /**
@@ -92,25 +93,26 @@ export const COLORS: { [key: string]: string } = {
   TEAL: "var(--teal-200)",
 };
 
-// export const COLORS_DARK: { [key: string]: string } = {
-//   // MAIN
-//   PRIMARY: "var(--primary-color)", // #8dd0ff
-//   COMPARE: "var(--teal-500)", // #20c997
-//   SORTED: "var(--purple-400)", // #8a66cd
-//   PRIMARY_LIGHT: "var(--primary-200)", // #ceebff
-//   BG_COLOR: "var(--surface-a)", // #2a323d
-//   // OTHERS
-//   PINK: "var(--pink-300)", // #e681b3
-//   RED: "var(--red-300)", // #e9828c
-//   ORANGE: "var(--orange-300)", // #feaf6d
-//   YELLOW: "var(--yellow-300)", // #ffd965
-//   GREEN: "var(--green-200)", // #9ccbb5
-//   BLUE: "var(--blue-300)", // #69a5fe
-//   CYAN: "var(--cyan-400)", // #3bd4f3
-//   INDIGO: "var(--indigo-200)", // #bd98f9
-//   GRAY: "var(--bluegray-600)", // #69798e
-//   TEAL: "var(--teal-200)", // #9fe8d2
-// };
+// TODO: Switch to these when updating theme
+export const COLORS_DARK: { [key: string]: string } = {
+  // MAIN
+  PRIMARY: "#8dd0ff",
+  COMPARE: "#20c997",
+  SORTED: "#8a66cd",
+  PRIMARY_LIGHT: "#ceebff",
+  BG_COLOR: "#2a323d",
+  // OTHERS
+  PINK: "#e681b3",
+  RED: "#e9828c",
+  ORANGE: "#feaf6d",
+  YELLOW: "#ffd965",
+  GREEN: "#9ccbb5",
+  BLUE: "#69a5fe",
+  CYAN: "#3bd4f3",
+  INDIGO: "#bd98f9",
+  GRAY: "#69798e",
+  TEAL: "#9fe8d2",
+};
 
 /**
  * Specific order of colors applied to heap sort levels

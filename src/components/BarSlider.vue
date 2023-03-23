@@ -17,8 +17,8 @@
 <script setup lang="ts">
 // Imports
 import { computed, ref, watch } from "vue";
-import { INITIAL_BAR_COUNT } from "@/utils/constants";
 import { useBarCount } from "@/composables/barCount";
+import { INITIAL_BAR_COUNT } from "@/utils/constants";
 
 // Composables
 const { updateBarCount } = useBarCount();

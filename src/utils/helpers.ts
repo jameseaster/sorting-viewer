@@ -1,3 +1,17 @@
+/**
+ * Manually updates stylesheet variables and classes
+ *
+ * PrimeVue's current method for toggling between light and ark modes
+ * involves copying the stylesheet css file into the public directory.
+ * This makes the project appear to be 90% css because those files
+ * are thousands of lines long.
+ *
+ * See: https://primevue.org/theming/#switchthemes
+ *
+ * Until PrimeVue updates their API for this functionality, I am manually
+ * changing specific values to be able to toggle between 'light' & 'dark' mode
+ */
+
 export const manuallyUpdateTheme = (isLight: boolean) => {
   const bodyEl = document.getElementById("app") as any;
   bodyEl.style.setProperty("--surface-a", isLight ? "#2a323d" : "#ffffff");

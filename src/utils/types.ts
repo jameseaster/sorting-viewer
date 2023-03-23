@@ -1,3 +1,5 @@
+export type Animations = (Overwrite | Compare)[];
+
 export interface Bar {
   value: number;
   color: string;
@@ -20,5 +22,3 @@ export interface Compare {
   idx2: number;
   action: "compare";
 }
-
-export type Animations = (Overwrite | Compare)[];

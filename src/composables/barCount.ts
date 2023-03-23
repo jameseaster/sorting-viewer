@@ -1,3 +1,4 @@
+// Imports
 import { ref, onMounted } from "vue";
 import type { Bar } from "@/utils/types";
 import { COLORS, INITIAL_BAR_COUNT } from "@/utils/constants";
@@ -8,6 +9,9 @@ const bars = ref<Bar[]>([]);
 const isSorting = ref(false);
 const quantity = ref(INITIAL_BAR_COUNT);
 
+/**
+ * Composable that returns functions to update "global" bar variables
+ */
 export function useBarCount() {
   // Updates the quantity and repopulates bar list
   const updateBarCount = (num: number) => {

@@ -59,7 +59,7 @@
 
 <script setup lang="ts">
 // Imports
-import { ref, type Ref } from "vue";
+import { ref } from "vue";
 import Info from "@/components/Info.vue";
 import { useToast } from "primevue/usetoast";
 import * as constants from "@/utils/constants";
@@ -76,7 +76,7 @@ const selected = ref(constants.MENU_OPTIONS[0]);
 const emit = defineEmits(constants.ALGO_EMITS);
 
 // Props
-const props = defineProps<{ isSorting: Ref<boolean> }>();
+const props = defineProps<{ isSorting: boolean }>();
 
 // Toggle info
 const toggleShowInfo = () => {
@@ -123,8 +123,5 @@ const createToast = () => {
   margin-top: 8px;
   align-items: center;
   justify-content: space-around;
-}
-.btn {
-  min-width: 92px;
 }
 </style>

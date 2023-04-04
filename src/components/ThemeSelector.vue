@@ -12,7 +12,7 @@
 <script setup lang='ts'>
 // Imports
 import { THEMES } from "@/utils/constants";
-import { ref, computed, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { manuallyUpdateTheme } from "@/utils/helpers";
 
 // State

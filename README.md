@@ -1,7 +1,7 @@
 <div align="center">
   <br>
   <h1>Sorting Viewer</h1>
-  <a href="https://jameseaster.github.io/sorting-viewer/"><strong>jameseaster.github.io/sorting-viewer</strong> </a>
+  <a href="https://sorting-viewer.netlify.app/"><strong>https://sorting-viewer.netlify.app/</strong> </a>
 </div>
 <br>
 <p align="center">
@@ -10,12 +10,12 @@
   <img src="https://img.shields.io/badge/code_style-prettier-brightgreen.svg?style=plastic" alt="Code style prettier">
 </p>
 
-<h3 align="center">Select an algorithm and press Go!</h3>
+<h3 align="center">Select an algorithm and press play!</h3>
 
-![app-screenshot](/public/screenshot.png)
+![app-screenshot](/public/screenshot.jpg)
 
 <p align="center">
-Sorting Viewer allows for a choice between 6 different algorithms, a variable data set size, and a short explanation of each visualization via the "More Info" button. The business logic for each algorithm is found in src/algorithms. As you know, the real challenge in this project build was manipulating timing and UX/UI changes in order to visualize the each algorithm in action. Hope you enjoy!
+Sorting Viewer allows for a choice between 6 different algorithms, a variable data set size, and a short explanation of each visualization via the info button. The business logic for each algorithm is found in src/algorithms. The real challenge in this web app was manipulating timing and style changes in order to visualize the each algorithm in action. Hope you enjoy!
 </p>
 
 ## Scripts
@@ -34,5 +34,6 @@ npm run dev
 
 ## Resources
 
-- [Vue](https://vuejs.org/)
+- [Vue 3](https://vuejs.org/)
 - [PrimeVue](https://primevue.org/)
+- [TypeScript](https://www.typescriptlang.org/)

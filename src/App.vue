@@ -1,6 +1,5 @@
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 import Data from "./components/Data.vue";
 import Header from "./components/Header.vue";
 import heapSort from "./algorithms/heapSort";
@@ -11,9 +10,9 @@ import Controls from "./components/Controls.vue";
 import { useBarCount } from "@/composables/barCount";
 import insertionSort from "./algorithms/insertionSort";
 import selectionSort from "./algorithms/selectionSort";
+import { COLORS, ALGORITHMS } from "@/utils/constants";
 import ThemeSelector from "./components/ThemeSelector.vue";
 import type { Animations, Compare, Overwrite } from "@/utils/types";
-import { COLORS, ALGORITHMS, ANIMATION_ACTION } from "@/utils/constants";
 
 const { isSorting, createNewBarList, lastAlgo, bars } = useBarCount();
 
@@ -65,14 +64,10 @@ const merge = async () => {
 
 const animate = async (animations: Animations) => {
   for (let todo of animations) {
-    if (lastAlgo.value !== ALGORITHMS.MERGE) {
-      break;
-    }
+    if (lastAlgo.value !== ALGORITHMS.MERGE) break;
 
-    const isComparativeAnimation = (
-      animation: Compare | Overwrite
-    ): animation is Compare => {
-      return todo.action === "compare";
+    const isComparativeAnimation = (animation: Compare | Overwrite): animation is Compare => {
+      return animation.action === "compare";
     };
 
     if (isComparativeAnimation(todo)) {
